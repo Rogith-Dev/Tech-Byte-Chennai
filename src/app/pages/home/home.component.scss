@@ -1,0 +1,150 @@
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Poppins', sans-serif;
+}
+
+.bg-color-blk {
+  background-color: #000;
+}
+
+.bg-white {
+  background-color: #ffffff;
+}
+
+.color-white {
+  color: #ffffff;
+}
+
+.font-weight-500 {
+  font-weight: 500;
+}
+
+.font-size-16 {
+  font-size: 16px;
+}
+
+.details-color {
+  background-color: #3b3b3b;
+}
+
+.header-padding {
+  padding: 14px;
+}
+
+.vertical-divider {
+  border-left: 1px dotted #ccc;
+  height: 20px;
+  margin: 0 10px;
+}
+
+.phone-margin {
+  margin-right: 5px;
+}
+
+.navbar .form-control {
+  border-radius: 20px;
+}
+
+.border-rad {
+  border-radius: 20px 0 0 20px;
+}
+
+.navbar {
+  position: fixed;
+  width: 100%;
+  background-color: transparent;
+  padding: 15px 20px;
+  transition: top 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+  z-index: 1000;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.07);
+}
+
+.navbar.scrolled {
+  top: 0;
+  background-color: #ffffff;
+  color: red;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.07);
+}
+
+header,
+nav.navbar {
+  opacity: 1;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+header.visible,
+nav.navbar.visible {
+  opacity: 0;
+  transform: translateY(0);
+}
+
+.content {
+  padding-top: 70px;
+}
+
+
+.search-bar {
+  border: 1px solid #ccc;
+  border-radius: 50px;
+  overflow: hidden;
+  max-width: 500px;
+  background-color: #f8f8f8;
+}
+
+.search-bar .form-control {
+  border-radius: 50px;
+  background-color: #f8f8f8;
+  box-shadow: none;
+}
+
+.search-bar .input-group-text {
+  background-color: #f8f8f8;
+  border: none;
+}
+
+.custom-width-70vh {
+  width: 60vh;
+}
+
+.font-size-search {
+  font-size: small;
+}
+
+.card-img-top {
+  height: 250px;
+  object-fit: cover;
+}
+
+.rounded-circle {
+  border: 1px solid #ccc;
+}
+
+.bg-grey {
+  background-color: #f8f8f8;
+}
+
+.product-detail-color {
+  background-color: #fafafa;
+}
+
+.sale {
+  background-color: #525252;
+  color: #ffffff;
+  height: 22px;
+  width: 50px;
+  border-radius: 12px 5px 5px 0;
+  font-size: 13px;
+}
+
+.filer-radius {
+  border-radius: 10px;
+}
+
+.color-right {
+  right: 0px;
+  position: absolute;
+}

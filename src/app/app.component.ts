@@ -1,10 +1,17 @@
+// app.component.ts
 import { Component } from '@angular/core';
+import { ReportService } from './service/report.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'angular-app';
+  username = 'Rogith';
+
+  constructor(private reportService: ReportService) { }
+
+  download() {
+    this.reportService.downloadReport(this.username);
+  }
 }
