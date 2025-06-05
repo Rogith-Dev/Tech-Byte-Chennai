@@ -15,6 +15,51 @@ body {
     font-family: 'Poppins', sans-serif;
 }
 
+.btn-primary {
+    background-color: #4A90E2 !important;
+    /* New background color */
+    border-color: #4A90E2 !important;
+    /* New border color */
+}
+
+.btn-primary:hover {
+    background-color: #357ABD !important;
+    /* Darker on hover */
+    border-color: #357ABD !important;
+}
+
 .dropdown-toggle {
     min-width: 150px;
+}
+
+.bg-grey-white {
+    background-color: #F5F7FA;
+}
+
+.bg-blk {
+    background-color: #000;
+}
+
+.bg-white {
+    background-color: #ffffff;
+}
+
+.bg-blue {
+    background-color: #0066ff;
+}
+
+.color-white {
+    color: #ffffff;
+}
+
+.color-black {
+    color: #000000;
+}
+
+.color-grey {
+    color: #676767;
+}
+
+.content {
+    padding-top: 75px;
 }

@@ -1,0 +1,72 @@
+<div class="content">
+  <div class="p-2 fs-3">
+    Add PC Components
+  </div>
+  <div class="p-3">
+    <div class="row">
+      <div class="col-lg-12">
+        <form [formGroup]="pcComponentAddForm">
+          <div class="row">
+            <div class="col-md-6 mt-2">
+              <!-- Product Name -->
+              <div class="col-sm-12 col-md-12 mt-2 mb-3">
+                <div class="form-group form-floating mb-0">
+                  <input formControlName="name" placeholder=" " style="z-index: 0;" class="form-control" required>
+                  <label class="col-form-label truncate">
+                    Product Name
+                    <span class="importanSymbol">*</span></label>
+                </div>
+              </div>
+              <!-- Product Type -->
+              <div class="col-sm-12 col-md-12 mt-2 mb-3">
+                <div class="form-floating">
+                  <mat-form-field class="w-100">
+                    <mat-label>Product Type <span class="importanSymbol">*</span></mat-label>
+                    <mat-select>
+                      <mat-option *ngFor="let data of serverConstant.ComponentsIcon"
+                        [value]="data.name">{{data.name}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <!-- Product Image -->
+              <div class="col-md-12 mt-2 mb-3">
+                <label for="productImage">Product Image</label>
+                <div class="form-group form-floating mb-0">
+                  <input type="file" class="form-control" (change)="onFileChange($event)" accept="image/*" />
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 mt-2">
+              <!-- Product Original Price -->
+              <div class="col-md-12 mt-2 mb-3">
+                <div class="form-group form-floating mb-0">
+                  <input type="number" formControlName="originalPrice" placeholder=" " class="form-control">
+                  <label class="col-form-label truncate">
+                    Product Original Price<span class="importanSymbol">*</span></label>
+                </div>
+              </div>
+              <!-- Product Price -->
+              <div class="col-md-12 mt-2 mb-3">
+                <div class="form-group form-floating mb-0">
+                  <input type="number" formControlName="price" placeholder=" " class="form-control">
+                  <label class="col-form-label truncate">
+                    Product Price<span class="importanSymbol">*</span></label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </form>
+      </div>
+    </div>
+
+    <div class="float-end d-flex gap-2">
+      <button type="button" class="btn btn-warning btn-w-m dim">
+        Cancel
+      </button>
+      <button class="btn btn-primary btn-w-m dim"><i class="fa fa-save"></i> Create</button>
+    </div>
+  </div>
+</div>
