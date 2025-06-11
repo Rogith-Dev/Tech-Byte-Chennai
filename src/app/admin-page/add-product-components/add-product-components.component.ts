@@ -23,7 +23,7 @@ export class AddProductComponent {
 
   ngOnInit() {
 
-    this.http.get('http://localhost:3000/api/v1/tech').subscribe({
+    this.http.get('http://localhost:3000/api/product/getproduct').subscribe({
       next: (res: any) => {
         console.log('resposne', res);
       },
@@ -60,7 +60,7 @@ export class AddProductComponent {
     formData.append('price', this.pcComponentAddForm.get('price')?.value);
     formData.append('originalPrice', this.pcComponentAddForm.get('originalPrice')?.value);
     formData.append('file', this.selectedFile);
-    this.http.post('http://localhost:3000/api/v1/tech/createproduct', formData).subscribe({
+    this.http.post('http://localhost:3000/api/product/createproduct', formData).subscribe({
       next: (res: any) => {
         alert('Saved');
       },

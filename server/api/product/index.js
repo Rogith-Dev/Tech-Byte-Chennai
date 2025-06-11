@@ -1,0 +1,20 @@
+'use strict';
+
+const express = require('express');
+const multer = require('multer');
+const router = express.Router();
+const controller = require('./product.controller');
+
+const storage = multer.diskStorage({
+    destination: './uploads',
+    filename: (req, file, cb) => cb(null, Date.now() + '-' + file.originalname)
+});
+const upload = multer({ storage });
+
+
+// Routes
+router.post('/createproduct', upload.single('file'), controller.createProduct);
+router.get('/getproduct', controller.getAllProducts);
+
+
+module.exports = router;
