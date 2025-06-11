@@ -17,20 +17,18 @@ const productSchema = new mongoose.Schema({
       validator: function (val) {
         return val < this.price;
       },
-      message:'price discount should lesser than the price'
+      message: 'price discount should lesser than the price'
     },
   },
   productType: {
     type: String,
     required: [true, "A Product must have a type"],
     enum: {
-      values: ["processor", "ram", "mouse","motheboard"],
+      values: ["processor", "ram", "mouse", "motheboard"],
       message: "Product type is either :processor, ram, mouse,motheboard",
     },
   },
-  images: [String],
+  filePath: String
 });
 
-const Product = mongoose.model("Product", productSchema);
-
-module.exports = Product;
+module.exports = mongoose.model("Product", productSchema);

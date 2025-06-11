@@ -1,43 +1,149 @@
 /* You can add global styles to this file, and also import other style files */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
 html,
 body {
     height: 100%;
+    // scroll-behavior: auto !important;
 }
 
 body {
     margin: 0;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Inter', sans-serif;
 }
 
 * {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Inter', sans-serif;
 }
 
 .btn-primary {
-    background-color: #4A90E2 !important;
-    /* New background color */
-    border-color: #4A90E2 !important;
-    /* New border color */
+    background-color: #2a9d8f;
+    border-color: #2a9d8f;
 }
 
 .btn-primary:hover {
-    background-color: #357ABD !important;
-    /* Darker on hover */
-    border-color: #357ABD !important;
+    background-color: #21867a;
+    border-color: #1c6f66;
+}
+
+.btn-cart-custom {
+    background-color: #ff9800;
+    border-color: #ff9800;
+    color: white;
+}
+
+.btn-cart-custom:hover {
+    background-color: #e68900;
+    border-color: #e68900;
+    color: white;
+}
+
+.transition-navbar {
+    transition: transform 0.5s ease-in-out;
+    // position: sticky;
+    // z-index: 1000;
+}
+
+.hide-header {
+    transform: translateY(-100%);
+}
+
+.scrolled {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .dropdown-toggle {
     min-width: 150px;
 }
 
+/* Dropdown menu */
+.accessories-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: white;
+    z-index: 999;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    min-width: 320px;
+    max-width: 600px;
+
+    /* Transition Effect */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    height: 100px;
+    // transition: opacity 0.4s ease 0.05s, transform 0.4s ease 0.05s height 4s ease;
+    transition: opacity 0.4s ease 0.05s, transform 0.4s ease 0.05s, height 0.5s ease;
+
+
+}
+
+.accessories-dropdown-wrapper:hover .accessories-dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    height: 300px;
+}
+
+.accessory-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    transition: background 0.2s ease;
+    text-decoration: none;
+    color: #000;
+}
+
+.accessory-item:hover {
+    background-color: #f8f9fa;
+}
+
+.accessory-img {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+    border-radius: 0.25rem;
+    background-color: #f1f1f1;
+}
+
+.accessory-title {
+    font-weight: 500;
+    font-size: 0.95rem;
+}
+
+@media (max-width: 768px) {
+    .accessories-dropdown {
+        position: static;
+        display: block;
+        box-shadow: none;
+        padding: 0.5rem;
+    }
+
+    .accessory-item {
+        padding: 0.5rem 0;
+    }
+}
+
+.accessories-dropdown-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.accessories-link {
+    font-weight: bold;
+    cursor: pointer;
+    color: #212529;
+}
+
 .bg-grey-white {
-    background-color: #F5F7FA;
+    background-color: #f8f9fa;
 }
 
 .bg-blk {
-    background-color: #000;
+    background-color: #111;
 }
 
 .bg-white {

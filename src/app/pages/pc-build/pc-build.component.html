@@ -25,7 +25,7 @@
   <div class="container my-4">
     <div class="row">
       <!-- Left Side: Component Selection -->
-      <div class="col-md-8">
+      <div class="col-md-9">
         <!-- Processor -->
 
         <div class="card mb-3 p-3" *ngFor="let data of serverConstant.ComponentsIcon">
@@ -66,9 +66,10 @@
       </div>
 
       <!-- Right Side: Cart Summary -->
-      <div class="col-md-4">
+      <div class="col-md-3">
         <div class="card p-3">
-          <h5>Total:</h5>
+          <h3><b>Total:</b></h3>
+          <!-- <strong class="pb-3">Total:</strong> -->
           <h4 class="text-end text-danger">₹0</h4>
 
           <button class="btn btn-warning w-100 my-2">Add to cart</button>

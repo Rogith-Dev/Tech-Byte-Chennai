@@ -8,14 +8,26 @@ import { ReportService } from './service/report.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  username = 'Rogith';
-  isScrolled = false;
+  public username = 'Rogith';
+  public isScrolled = false;
+  public hideHeader = false;
+  private lastScrollTop: any = 0;
 
   @HostListener('window:scroll', [])
-  onWindowScroll(): void {
-    this.isScrolled = window.scrollY > 50;
+  onWindowScroll() {
+    const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+    this.isScrolled = currentScroll > 50;
+    if (currentScroll > this.lastScrollTop && currentScroll > 3) {
+      this.hideHeader = true;
+    } else {
+      this.hideHeader = false;
+    }
+    this.lastScrollTop = currentScroll <= 0 ? 0 : currentScroll; // For Mobile or negative scrolling
   }
   constructor(private reportService: ReportService) { }
+
+  ngOnInit() {
+  }
 
   download() {
     this.reportService.downloadReport(this.username);

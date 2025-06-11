@@ -7,12 +7,17 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ProductCardComponent } from './components/product-card/product-card.component';
-import { HomeComponent } from './pages/home/home.component';
+import { PreBuildPCListComponent } from './pages/pre-build-pc/prebuilt-pc-list/prebuilt-pc-list.component';
+import { PreBuildPCDetailComponent } from './pages/pre-build-pc/prebuilt-pc-detail/prebuilt-pc-detail.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSliderModule } from '@angular/material/slider';
+import { MatSidenavModule } from "@angular/material/sidenav";
+import { MatListModule } from "@angular/material/list";
+import { MatIconModule } from "@angular/material/icon";
 import { CommonModule } from '@angular/common';
 import { PCBuildComponent } from './pages/pc-build/pc-build.component';
 import { AddProductComponent } from './admin-page/add-product-components/add-product-components.component';
@@ -20,7 +25,8 @@ import { AddProductComponent } from './admin-page/add-product-components/add-pro
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
+    PreBuildPCListComponent,
+    PreBuildPCDetailComponent,
     ProductCardComponent,
     PCBuildComponent,
     AddProductComponent
@@ -38,6 +44,10 @@ import { AddProductComponent } from './admin-page/add-product-components/add-pro
     MatInputModule,
     MatSelectModule,
     MatFormFieldModule,
+    MatSliderModule,
+    MatSidenavModule,
+    MatListModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]

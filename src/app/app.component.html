@@ -1,59 +1,81 @@
+<!-- header.component.html -->
 <header #headerRef [class.visible]="isScrolled"
-    class="d-flex justify-content-between align-items-center bg-blk border-bottom header-padding">
-
+    class="d-none d-lg-flex justify-content-between align-items-center bg-blk border-bottom header-padding px-4 py-2">
     <!-- Email Contact -->
-    <div class="email-contact text-white ms-5 ps-5 opacity-75">
-        <i class="fa fa-solid fa-envelope"></i>
-        <a class="text-white text-decoration-none" href="mailto:contact@example.com">
-            {{'contact@example.com'}}
+    <div class="email-contact text-white d-flex align-items-center opacity-75 ps-5 ms-5">
+        <i class="fa fa-envelope me-2"></i>
+        <a class="text-white text-decoration-none me-3" href="mailto:techbytechennai@gmail.com">
+            {{'techbytechennai@gmail.com'}}
         </a>
-        <span class="vertical-divider"></span>
-        <span class="phone-margin"><i class="fa fa-solid fa-phone"></i></span>
-        <span>123-456-7890</span>
+        <i class="fa fa-phone me-2"></i>
+        <span>+91 9345678318</span>
     </div>
 
     <!-- Social Media Icons -->
-    <div class="social-icons me-5 pe-5 opacity-75">
+    <div class="social-icons pe-5 me-5 d-flex opacity-75">
         <a href="https://facebook.com" target="_blank" class="text-white mx-2">
             <i class="fa fa-facebook"></i>
         </a>
         <a href="https://twitter.com" target="_blank" class="text-white mx-2">
             <i class="fa fa-twitter"></i>
         </a>
-        <a href="https://instagram.com" target="_blank" class="text-white mx-2">
+        <a href="https://www.instagram.com/techbytechennai" target="_blank" class="text-white mx-2">
             <i class="fa fa-instagram"></i>
         </a>
-        <a href="https://linkedin.com" target="_blank" class="text-white mx-2">
+        <a href="https://www.linkedin.com/in/rogith-t" target="_blank" class="text-white mx-2">
             <i class="fa fa-linkedin"></i>
         </a>
     </div>
 </header>
 
-<nav #navbarRef [class.scrolled]="isScrolled" class="navbar navbar-expand-lg navbar-dark px-3 bg-grey-white">
-    <div class="d-flex align-items-center row ms-4 w-50">
-        <div class="col">
-            <img src="../../../assets/images/horizontal-removebg-preview.png" alt="Logo" height="40" class="me-3" />
+<nav #navbarRef [class.scrolled]="isScrolled" [class.hide-header]="hideHeader"
+    class="navbar navbar-expand-lg navbar-dark bg-grey-white transition-navbar px-3">
+    <div class="container-fluid">
+        
+        <!-- Brand and Toggler -->
+        <a class="navbar-brand d-flex align-items-center" routerLink="/">
+            <img src="../../../assets/images/horizontal-removebg-preview.png" alt="Logo" height="40" class="me-2" />
+        </a>
+
+        <!-- Navbar Items -->
+        <div class="collapse navbar-collapse" id="mainNavbar">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link text-dark" routerLink="/pc-build">PC Build</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" routerLink="/prebuild-pc-list">Pre Build PC</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-dark" href="#" id="gamingDropdown" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        Gaming Gears
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="gamingDropdown">
+                        <li><a class="dropdown-item" routerLink="/accessories/keyboards">Gaming Keyboards</a></li>
+                        <li><a class="dropdown-item" routerLink="/accessories/mouse">High-Precision Mouse</a></li>
+                        <li><a class="dropdown-item" routerLink="/accessories/headphones">Gaming Headphones</a></li>
+                        <li><a class="dropdown-item" routerLink="/accessories/cables">Cables & Adapters</a></li>
+                    </ul>
+                </li>
+            </ul>
+
+            <!-- Search and Icons -->
+            <div class="d-flex align-items-center mt-2 mt-lg-0">
+
+                <div class="input-group search-bar me-4 custom-width-70vh">
+                    <span class="input-group-text bg-light border-0 opacity-50">
+                        <i class="bi bi-search"></i>
+                    </span>
+                    <input type="text" class="form-control border-0 bg-light opacity-50 p-0 font-size-search"
+                        placeholder="Search Products" />
+                </div>
+
+                <button class="btn"><i class="fa fa-heart-o"></i></button>
+                <button class="btn"><i class="fa fa-shopping-basket"></i></button>
+                <button class="btn"><i class="fa fa-user-o"></i></button>
+            </div>
         </div>
-        <div class="col text-dark pc-build-link" [routerLink]="['/pc-build']">PC Build</div>
-        <div class="col text-dark">Deals</div>
-        <div class="col text-dark">Deals</div>
-        <div class="col text-dark">Deals</div>
-    </div>
-
-    <div class="flex-grow-1"></div>
-
-    <div class="d-flex align-items-center me-5 pe-5">
-        <div class="input-group search-bar me-4 custom-width-70vh">
-            <span class="input-group-text bg-light border-0 opacity-50">
-                <i class="bi bi-search"></i>
-            </span>
-            <input type="text" class="form-control border-0 bg-light opacity-50 p-0 font-size-search"
-                placeholder="Search Products" />
-        </div>
-
-        <button class="btn"><i class="fa fa-heart-o"></i></button>
-        <button class="btn"><i class="fa fa-shopping-basket"></i></button>
-        <button class="btn"><i class="fa fa-user-o"></i></button>
     </div>
 </nav>
 

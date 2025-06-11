@@ -4,6 +4,7 @@ import * as _ from 'lodash';
 //@ts-ignore
 import ServerConstant from '../../../../server/constant/constant';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-add-product-components',
@@ -16,11 +17,20 @@ export class AddProductComponent {
   public selectedFile: File | null = null;
   public serverConstant = ServerConstant;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private http: HttpClient) {
   }
 
 
   ngOnInit() {
+
+    this.http.get('http://localhost:3000/api/v1/tech').subscribe({
+      next: (res: any) => {
+        console.log('resposne', res);
+      },
+      error: (err) => {
+        console.log('error', err);
+      }
+    })
 
 
     this.pcComponentAddForm = this.fb.group({
@@ -28,7 +38,6 @@ export class AddProductComponent {
       productType: [Validators.required],
       price: [null, Validators.required],
       originalPrice: [null, Validators.required],
-      productImage: [null, Validators.required]
     });
 
   }
@@ -37,12 +46,9 @@ export class AddProductComponent {
     return this.pcComponentAddForm.controls;
   }
 
-  onFileChange(event: Event): void {
-    const input = event.target as HTMLInputElement;
-    if (input.files && input.files.length) {
-      const file = input.files[0];
-      this.selectedFile = file;
-      this.pcComponentAddForm.patchValue({ productImage: file });
+  onFileChange(event: any) {
+    if (event.target.files.length > 0) {
+      this.selectedFile = event.target.files[0];
     }
   }
 
@@ -53,12 +59,17 @@ export class AddProductComponent {
     formData.append('name', this.pcComponentAddForm.get('name')?.value);
     formData.append('price', this.pcComponentAddForm.get('price')?.value);
     formData.append('originalPrice', this.pcComponentAddForm.get('originalPrice')?.value);
-    formData.append('productImage', this.selectedFile);
+    formData.append('file', this.selectedFile);
+    this.http.post('http://localhost:3000/api/v1/tech/createproduct', formData).subscribe({
+      next: (res: any) => {
+        alert('Saved');
+      },
+      error: (err) => {
+        console.log('error', err);
+        alert('Error');
+      }
+    })
 
-    // this.http.post('http://localhost:3000/upload-component', formData).subscribe({
-    //   next: (res) => console.log('Upload success:', res),
-    //   error: (err) => console.error('Upload failed:', err)
-    // });
   }
 
 }

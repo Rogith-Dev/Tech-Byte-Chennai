@@ -1,0 +1,26 @@
+.table th,
+.table td {
+  vertical-align: middle;
+}
+
+.table {
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.original-price {
+  color: #9e9e9e;
+  text-decoration: line-through;
+  font-size: 14px;
+}
+
+.discounted-price {
+  color: #d32f2f;
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.rating-stars {
+  color: #fbc02d;
+  margin-right: 2px;
+}

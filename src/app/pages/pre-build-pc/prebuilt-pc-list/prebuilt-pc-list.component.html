@@ -1,0 +1,207 @@
+<div #contentRef class="content">
+  <div class="container mt-4 px-4">
+
+    <!-- Header Row -->
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center mb-3">
+      <div>
+        <h2 class="fw-bold mb-1">
+          Pre-Build PCs
+        </h2>
+        <p class="text-muted mb-0">
+          High-performance desktops built for gaming, work, and everything in between. No hassle — just plug and play.
+        </p>
+      </div>
+
+      <!-- Sort Dropdown -->
+      <div class="dropdown mt-3 mt-md-0">
+        <label class="fw-semibold me-2" for="sortDropdown">Sort by:</label>
+        <button class="btn btn-light border dropdown-toggle" type="button" id="sortDropdown" data-bs-toggle="dropdown"
+          aria-expanded="false">
+          Most Popular
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="sortDropdown">
+          <li><a class="dropdown-item" href="#">Most Popular</a></li>
+          <li><a class="dropdown-item" href="#">Price: Low to High</a></li>
+          <li><a class="dropdown-item" href="#">Price: High to Low</a></li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+  <hr class="mt-4 mb-3">
+
+  <div class="container container-fluid mt-4">
+    <div class="row">
+      <!-- Sidebar Filter -->
+      <div class="col-md-3">
+
+        <div class="d-flex justify-content-between">
+          <span>₹{{ minPrice | number }}</span>
+          <span>₹{{ maxPrice | number }}</span>
+        </div>
+        <mat-slider class="custom-range-slider" min="15000" max="150000" step="1000" tickInterval="0">
+          <input matSliderStartThumb [(ngModel)]="minPrice" (change)="onSliderChange()" />
+          <input matSliderEndThumb [(ngModel)]="maxPrice" (change)="onSliderChange()" />
+        </mat-slider>
+
+
+        <div class="p-4 border rounded-4 shadow-sm">
+          <h3 class="fw-bold mb-3">Filter</h3>
+          <hr class="my-2">
+
+          <!-- Processor Filter -->
+          <div class="mb-3">
+            <h4 class="text-muted mb-2">Processor</h4>
+            <div class="form-check" *ngFor="let processor of processorFilters;">
+              <input class="form-check-input" type="checkbox" [id]="processor.name" [value]="processor.value">
+              <label class="form-check-label" [for]="processor.name">{{processor.name}} <span
+                  class="text-muted">(7)</span></label>
+            </div>
+          </div>
+
+          <hr class="my-2">
+
+          <!-- Use Case Filters -->
+          <div>
+            <h4 class="text-muted mb-2">Colors</h4>
+            <div *ngFor="let useCase of useCaseFilters" class="form-check">
+              <input class="form-check-input" type="checkbox" [id]="useCase.name" [value]="useCase.value">
+              <label class="form-check-label" [for]="useCase.name">
+                {{ useCase.name }}
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- Products -->
+      <div class="col-md-9">
+        <div class="row g-4">
+          <div class="col-md-4" *ngFor="let product of products">
+            <div class="card border shadow-sm rounded-4">
+              <div class="position-relative">
+                <a [routerLink]="'/prebuild-pc-detail'">
+                  <img [src]="product.image" class="card-img-top rounded-top-4 h-100" alt="...">
+                </a>
+                <span
+                  class="position-absolute top-0 start-0 d-flex justify-content-center align-items-center sale">{{product.discountPercentage}}%</span>
+              </div>
+              <div class="card-body product-detail-color rounded-bottom-4">
+                <div class="d-flex align-items-center mb-2">
+                  <span>
+                    <ng-container *ngFor="let star of createArray(product.rating)">
+                      <i class="bi bi-star-fill rating-stars"></i>
+                    </ng-container>
+                  </span>
+                </div>
+                <h3 class="font-weight-500 text-ellipsis" [attr.title]="product.name">
+                  <a class="card-title text-decoration-none" [routerLink]="['/prebuild-pc-detail']">{{ product.name
+                    }}</a>
+                </h3>
+
+                <p class="mb-3 font-size-16">
+                  <span class="original-price">{{ product.originalPrice | currency:'INR':'symbol':'1.0-0' }}</span>
+                  <span class="discounted-price" *ngIf="product.discountedPrice">
+                    &nbsp;{{ product.discountedPrice | currency:'INR':'symbol':'1.0-0' }}
+                  </span>
+                </p>
+
+                <div class="d-flex justify-content-between">
+                  <button class="btn view-btn" [routerLink]="'/prebuild-pc-detail'">View Details</button>
+                  <button class="btn border rounded-circle">
+                    <i class="bi bi-heart"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- <div class="card" style="background-color: red;">red</div> -->
+  <div>red</div>
+  <div>red</div>
+  <div>red</div>
+  <div>red</div>
+  <div>red</div>
+  <div>red</div>
+  <div>red</div>
+  <div>red</div>
+  <div>red</div>
+  <div>red</div>
+  <div>red</div>
+  <div>red</div>
+  <div>red</div>
+  <div>red</div>
+  <div>red</div>
+  <div>red</div>
+  <div>red</div>
+  <div>red</div>
+  <div>red</div>
+  <div>red</div>
+  <div>red</div>
+  <div>red</div>
+  <div>red</div>
+  <div>red</div>
+  <div>red</div>
+  <div>red</div>
+  <div>red</div>
+  <div>red</div>
+  <div>red</div>
+  <div>red</div>
+  <div>red</div>
+  <div>red</div>
+  <div>red</div>
+  <div>red</div>
+  <div>red</div>
+  <div>red</div>
+  <div>red</div>
+  <div>red</div>
+  <div>red</div>
+  <div>red</div>
+  <div>red</div>
+  <div>red</div>
+  <div>red</div>
+  <div>red</div>
+  <div>red</div>
+  <div>red</div>
+  <div>red</div>
+  <div>red</div>
+  <div>red</div>
+  <div>red</div>
+  <div>red</div>
+  <div>red</div>
+  <div>red</div>
+  <div>red</div>
+  <div>red</div>
+  <div>red</div>
+  <div>red</div>
+  <div>red</div>
+  <div>red</div>
+  <div>red</div>
+  <div>red</div>
+  <div>red</div>
+  <div>red</div>
+  <div>red</div>
+  <div>red</div>
+  <div>red</div>
+  <div>red</div>
+  <div>red</div>
+  <div>red</div>
+  <div>red</div>
+  <div>red</div>
+  <div>red</div>
+  <div>red</div>
+  <div>red</div>
+  <div>red</div>
+  <div>red</div>
+  <div>red</div>
+  <div>red</div>
+  <div>red</div>
+  <div>red</div>
+</div>
