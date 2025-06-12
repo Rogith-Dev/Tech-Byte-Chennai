@@ -38,12 +38,12 @@ exports.getProductById = async (req, res) => {
 
 exports.createProduct = async (req, res) => {
     try {
-        const { name, email, phone } = req.body;
+        const { name, originalPrice , price } = req.body;
         const filePath = req.file ? `http://localhost:3000/uploads/${req.file.filename}` : '';
 
-        const formData = new FormData({ name, email, phone, filePath });
-        await formData.save();
-        res.status(201).json({ success: true, data: formData });
+        const product = new Product({ name, originalPrice, price, filePath });
+        await product.save();
+        res.status(201).json({ success: true, data: product });
     } catch (err) {
         res.status(500).json({ success: false, error: err.message });
     }
@@ -52,7 +52,7 @@ exports.createProduct = async (req, res) => {
 
 exports.getAllForms = async (req, res) => {
     try {
-        const forms = await FormData.find();
+        const forms = await Product.find();
         res.status(200).json(forms);
     } catch (err) {
         res.status(500).json({ error: err.message });

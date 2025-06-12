@@ -20,7 +20,7 @@ import { MatListModule } from "@angular/material/list";
 import { MatIconModule } from "@angular/material/icon";
 import { CommonModule } from '@angular/common';
 import { PCBuildComponent } from './pages/pc-build/pc-build.component';
-import { AddProductComponent } from './admin-page/add-product-components/add-product-components.component';
+import { AddPCHardwareComponent } from './admin-page/add-pc-hardware/add-pc-hardware.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +29,7 @@ import { AddProductComponent } from './admin-page/add-product-components/add-pro
     PreBuildPCDetailComponent,
     ProductCardComponent,
     PCBuildComponent,
-    AddProductComponent
+    AddPCHardwareComponent
   ],
   imports: [
     BrowserModule,

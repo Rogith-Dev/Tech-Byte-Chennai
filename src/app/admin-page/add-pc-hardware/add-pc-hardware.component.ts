@@ -7,11 +7,11 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
-  selector: 'app-add-product-components',
-  templateUrl: './add-product-components.component.html',
-  styleUrls: ['./add-product-components.component.scss']
+  selector: 'app-add-pc-hardware',
+  templateUrl: './add-pc-hardware.component.html',
+  styleUrls: ['./add-pc-hardware.component.scss']
 })
-export class AddProductComponent {
+export class AddPCHardwareComponent {
 
   public pcComponentAddForm!: FormGroup;
   public selectedFile: File | null = null;
