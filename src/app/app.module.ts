@@ -18,9 +18,13 @@ import { MatSliderModule } from '@angular/material/slider';
 import { MatSidenavModule } from "@angular/material/sidenav";
 import { MatListModule } from "@angular/material/list";
 import { MatIconModule } from "@angular/material/icon";
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { CommonModule } from '@angular/common';
 import { PCBuildComponent } from './pages/pc-build/pc-build.component';
-import { AddPCHardwareComponent } from './admin-page/add-pc-hardware/add-pc-hardware.component';
+import { PCHardwareAddComponent } from './admin-page/pc-hardware-add/pc-hardware-add.component';
+import { PCHardwareViewComponent } from './admin-page/pc-hardware-view/pc-hardware-view.component';
+import { PCHardwareListComponent } from './admin-page/pc-hardware-list/pc-hardware-list.component';
+import { PCHardwareEditComponent } from './admin-page/pc-hardware-edit/pc-hardware-edit.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +33,10 @@ import { AddPCHardwareComponent } from './admin-page/add-pc-hardware/add-pc-hard
     PreBuildPCDetailComponent,
     ProductCardComponent,
     PCBuildComponent,
-    AddPCHardwareComponent
+    PCHardwareAddComponent,
+    PCHardwareViewComponent,
+    PCHardwareEditComponent,
+    PCHardwareListComponent
   ],
   imports: [
     BrowserModule,
@@ -47,7 +54,8 @@ import { AddPCHardwareComponent } from './admin-page/add-pc-hardware/add-pc-hard
     MatSliderModule,
     MatSidenavModule,
     MatListModule,
-    MatIconModule
+    MatIconModule,
+    MatSlideToggleModule
   ],
   providers: [],
   bootstrap: [AppComponent]

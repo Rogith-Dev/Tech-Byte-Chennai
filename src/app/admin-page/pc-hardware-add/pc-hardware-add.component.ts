@@ -7,17 +7,18 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
-  selector: 'app-add-pc-hardware',
-  templateUrl: './add-pc-hardware.component.html',
-  styleUrls: ['./add-pc-hardware.component.scss']
+  selector: 'app-pc-hardware-add',
+  templateUrl: './pc-hardware-add.component.html',
+  styleUrls: ['./pc-hardware-add.component.scss']
 })
-export class AddPCHardwareComponent {
+export class PCHardwareAddComponent {
 
   public pcComponentAddForm!: FormGroup;
   public selectedFile: File | null = null;
   public serverConstant = ServerConstant;
 
-  constructor(private fb: FormBuilder, private http: HttpClient) {
+  constructor(
+    private fb: FormBuilder, private http: HttpClient) {
   }
 
 
@@ -36,13 +37,14 @@ export class AddPCHardwareComponent {
     this.pcComponentAddForm = this.fb.group({
       name: ['', Validators.required],
       productType: [Validators.required],
-      price: [null, Validators.required],
+      sellingPrice: [null, Validators.required],
       originalPrice: [null, Validators.required],
+      isActive: ['']
     });
 
   }
 
-  get docForm() {
+  get addForm() {
     return this.pcComponentAddForm.controls;
   }
 
@@ -57,9 +59,12 @@ export class AddPCHardwareComponent {
 
     const formData = new FormData();
     formData.append('name', this.pcComponentAddForm.get('name')?.value);
-    formData.append('price', this.pcComponentAddForm.get('price')?.value);
+    formData.append('sellingPrice', this.pcComponentAddForm.get('sellingPrice')?.value);
     formData.append('originalPrice', this.pcComponentAddForm.get('originalPrice')?.value);
+    formData.append('productType', this.pcComponentAddForm.get('productType')?.value);
+    formData.append('isActive', this.pcComponentAddForm.get('isActive')?.value);
     formData.append('file', this.selectedFile);
+
     this.http.post('http://localhost:3000/api/product/createproduct', formData).subscribe({
       next: (res: any) => {
         alert('Saved');

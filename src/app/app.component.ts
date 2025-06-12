@@ -1,6 +1,5 @@
 // app.component.ts
 import { Component, HostListener } from '@angular/core';
-import { ReportService } from './service/report.service';
 
 @Component({
   selector: 'app-root',
@@ -24,12 +23,8 @@ export class AppComponent {
     }
     this.lastScrollTop = currentScroll <= 0 ? 0 : currentScroll; // For Mobile or negative scrolling
   }
-  constructor(private reportService: ReportService) { }
+  constructor() { }
 
   ngOnInit() {
-  }
-
-  download() {
-    this.reportService.downloadReport(this.username);
   }
 }

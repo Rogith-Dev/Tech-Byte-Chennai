@@ -6,9 +6,7 @@ exports.getAllProducts = async (req, res) => {
         res.status(200).json({
             status: 'success',
             results: products.length,
-            data: {
-                products
-            }
+            data: products
         })
     } catch (error) {
         res.status(404).json({
@@ -38,14 +36,49 @@ exports.getProductById = async (req, res) => {
 
 exports.createProduct = async (req, res) => {
     try {
-        const { name, originalPrice , price } = req.body;
+        const { name, originalPrice, sellingPrice, productType, isActive } = req.body;
         const filePath = req.file ? `http://localhost:3000/uploads/${req.file.filename}` : '';
 
-        const product = new Product({ name, originalPrice, price, filePath });
+        const product = new Product({ name, originalPrice, sellingPrice, productType, isActive, filePath });
         await product.save();
         res.status(201).json({ success: true, data: product });
     } catch (err) {
         res.status(500).json({ success: false, error: err.message });
+    }
+};
+
+exports.getProductDetail = async (req, res) => {
+    try {
+        const productId = req.params.id;
+        const product = await Product.findById(productId);
+        res.status(200).json(product);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+};
+
+exports.updateProduct = async (req, res) => {
+    try {
+        const { productId, name, sellingPrice, originalPrice, productType, isActive } = req.body;
+
+        // Optionally use req.file if a new file was uploaded
+        const updateData = {
+            name,
+            sellingPrice,
+            originalPrice,
+            productType,
+            isActive,
+        };
+
+        if (req.file) {
+            updateData.image = req.file.filename; // or store path, originalname, etc.
+        }
+
+        const updatedProduct = await Product.findByIdAndUpdate(productId, updateData, { new: true });
+
+        res.status(200).json(updatedProduct);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
     }
 };
 

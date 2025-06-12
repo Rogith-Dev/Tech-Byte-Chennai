@@ -1,0 +1,60 @@
+<div class="content">
+    <div class="container py-4">
+        <div class="card shadow-sm p-4">
+            <h4 class="mb-4">🔍 Product Details</h4>
+
+            <div class="row">
+                <!-- Left Column -->
+                <div class="col-md-6">
+                    <!-- Product Name -->
+                    <div class="mb-3">
+                        <label class="fw-bold">Product Name:</label>
+                        <p>{{ pcComponentObj.name }}</p>
+                    </div>
+
+                    <!-- Product Type -->
+                    <div class="mb-3">
+                        <label class="fw-bold">Product Type:</label>
+                        <p>{{ pcComponentObj.productType }}</p>
+                    </div>
+
+                    <!-- Product Image -->
+                    <div class="mb-3">
+                        <label class="fw-bold">Product Image:</label>
+                        <div *ngIf="pcComponentObj.filePath">
+                            <img [src]="pcComponentObj.filePath" alt="Product Image" class="img-thumbnail"
+                                style="max-width: 200px;">
+                        </div>
+                        <div *ngIf="!pcComponentObj.filePath" class="text-muted">No image uploaded</div>
+                    </div>
+                </div>
+
+                <!-- Right Column -->
+                <div class="col-md-6">
+                    <!-- Original Price -->
+                    <div class="mb-3">
+                        <label class="fw-bold">Original Price:</label>
+                        <p>₹ {{ pcComponentObj.originalPrice }}</p>
+                    </div>
+
+                    <!-- Product Price -->
+                    <div class="mb-3">
+                        <label class="fw-bold">Selling Price:</label>
+                        <p>₹ {{ pcComponentObj.sellingPrice }}</p>
+                    </div>
+
+                    <!-- Active Status -->
+                    <div class="mb-3">
+                        <label class="fw-bold">Status:</label>
+                        <p>
+                            <span [class]="pcComponentObj.isActive ? 'text-success' : 'text-danger'">
+                                {{ pcComponentObj.isActive ? 'Active' : 'Inactive' }}
+                            </span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

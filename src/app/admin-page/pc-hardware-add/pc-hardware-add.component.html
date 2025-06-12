@@ -20,13 +20,15 @@
               <!-- Product Type -->
               <div class="col-sm-12 col-md-12 mt-2 mb-3">
                 <div class="form-floating">
-                  <mat-form-field class="w-100">
+                  <mat-form-field appearance="fill" class="w-100">
                     <mat-label>Product Type <span class="importanSymbol">*</span></mat-label>
-                    <mat-select>
-                      <mat-option *ngFor="let data of serverConstant.ComponentsIcon"
-                        [value]="data.name">{{data.name}}</mat-option>
+                    <mat-select formControlName="productType">
+                      <mat-option *ngFor="let data of serverConstant.ComponentsIcon" [value]="data.name">
+                        {{ data.name }}
+                      </mat-option>
                     </mat-select>
                   </mat-form-field>
+
                 </div>
               </div>
 
@@ -34,7 +36,8 @@
               <div class="col-md-12 mt-2 mb-3">
                 <label for="productImage">Product Image</label>
                 <div class="form-group form-floating mb-0">
-                  <input type="file" class="form-control" (change)="onFileChange($event)" accept="image/*" />
+                  <input type="file" class="form-control" (change)="onFileChange($event)"
+                    accept="image/*" />
                 </div>
               </div>
             </div>
@@ -50,10 +53,18 @@
               <!-- Product Price -->
               <div class="col-md-12 mt-2 mb-3">
                 <div class="form-group form-floating mb-0">
-                  <input type="number" formControlName="price" placeholder=" " class="form-control">
+                  <input type="number" formControlName="sellingPrice" placeholder=" " class="form-control">
                   <label class="col-form-label truncate">
                     Product Price<span class="importanSymbol">*</span></label>
                 </div>
+              </div>
+              <!-- Active -->
+
+              <div class="col-md-12 mt-2 mb-3">
+                <label class="switch">
+                  <input type="checkbox" formControlName="isActive">
+                  <span class="slider round"></span>
+                </label>
               </div>
             </div>
           </div>
