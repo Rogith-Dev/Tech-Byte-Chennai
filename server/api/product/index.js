@@ -17,6 +17,8 @@ router.post('/createproduct', upload.single('file'), controller.createProduct);
 router.get('/getProductDetail/:id', controller.getProductDetail);
 router.post('/update', upload.single('file'), controller.updateProduct);
 router.get('/getProductList', controller.getAllProducts);
+router.post('/getProductListByName', controller.getProductListByName);
+router.post('/getProductsByFilter', controller.getProductsByFilter);
 
 
 module.exports = router;

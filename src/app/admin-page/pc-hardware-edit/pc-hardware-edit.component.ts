@@ -6,7 +6,7 @@ import ServerConstant from '../../../../server/constant/constant';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { HttpService } from 'src/app/services/http-service/http.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-pc-hardware-edit',
@@ -22,13 +22,18 @@ export class PCHardwareEditComponent {
   fileName: any;
 
 
-  constructor(private fb: FormBuilder, private http: HttpClient, private route: ActivatedRoute) {
+  constructor(
+    private fb: FormBuilder,
+    private http: HttpClient,
+    private activatedRoute: ActivatedRoute,
+    private router: Router
+  ) {
   }
 
 
   ngOnInit() {
 
-    this.productId = this.route.snapshot.paramMap.get('id') || '';
+    this.productId = this.activatedRoute.snapshot.paramMap.get('id') || '';
 
     this.pcComponentEditForm = this.fb.group({
       name: ['', Validators.required],
@@ -86,7 +91,10 @@ export class PCHardwareEditComponent {
     }
 
     this.http.post('http://localhost:3000/api/product/update', formData).subscribe({
-      next: () => alert('Updated successfully'),
+      next: () => {
+        alert('Updated successfully');
+        this.router.navigate(['/pc-hardware-list']);
+      },
       error: err => {
         console.error(err);
         alert('Update failed');

@@ -80,7 +80,7 @@ module.exports.PCComponentTypes = {
 
 
 module.exports.ProcessorCatagory = {
-    Branch: {
+    Brand: {
         amd: 'AMD',
         intel: 'Intel'
     },
@@ -103,7 +103,7 @@ module.exports.ComponentsIcon = [
         discount: null,
         image: 'assets/images/cpu.png',
         alt: 'CPU',
-        type: 'cpu'
+        type: 'Processor'
     },
     {
         name: "Motherboard",
@@ -111,7 +111,7 @@ module.exports.ComponentsIcon = [
         discount: 1000,
         image: 'assets/images/motherboard.png',
         alt: 'Motherboard',
-        type: 'motherboard'
+        type: 'Motherboard'
     },
     {
         name: "Ram",
@@ -119,7 +119,7 @@ module.exports.ComponentsIcon = [
         discount: 1000,
         image: 'assets/images/ram.png',
         alt: 'Ram',
-        type: 'ram'
+        type: 'Ram'
     },
     {
         name: "Storage 1",
@@ -127,7 +127,7 @@ module.exports.ComponentsIcon = [
         discount: 1000,
         image: 'assets/images/hard.png',
         alt: 'Storage',
-        type: 'storage'
+        type: 'Storage'
     },
     {
         name: "Storage 2",
@@ -135,7 +135,7 @@ module.exports.ComponentsIcon = [
         discount: 1000,
         image: 'assets/images/hard.png',
         alt: 'Storage',
-        type: 'storage'
+        type: 'Storage'
     },
     {
         name: "Cabinet",
@@ -143,7 +143,7 @@ module.exports.ComponentsIcon = [
         discount: 1000,
         image: 'assets/images/desktop.png',
         alt: 'Cabinet',
-        type: 'cabinet'
+        type: 'Cabinet'
     },
     {
         name: "Fan",
@@ -151,7 +151,7 @@ module.exports.ComponentsIcon = [
         discount: 1000,
         image: 'assets/images/fan.png',
         alt: 'Fan',
-        type: 'fan'
+        type: 'Fan'
     },
     {
         name: "Cooler",
@@ -159,7 +159,7 @@ module.exports.ComponentsIcon = [
         discount: 1000,
         image: 'assets/images/cooler.png',
         alt: 'Cooler',
-        type: 'cooler'
+        type: 'Cooler'
     },
     {
         name: "Graphics Card",
@@ -167,7 +167,7 @@ module.exports.ComponentsIcon = [
         discount: 1000,
         image: 'assets/images/gpu.png',
         alt: 'GPU',
-        type: 'gpu'
+        type: 'GPU'
     },
     {
         name: "Power Supply Unit",
@@ -175,7 +175,7 @@ module.exports.ComponentsIcon = [
         discount: 1000,
         image: 'assets/images/psu.png',
         alt: 'PSU',
-        type: 'psu'
+        type: 'PSU'
     },
     {
         name: "Monitor",
@@ -183,7 +183,7 @@ module.exports.ComponentsIcon = [
         discount: 1000,
         image: 'assets/images/monitor.png',
         alt: 'Monitor',
-        type: 'monitor'
+        type: 'Monitor'
     },
     {
         name: "Keyboard",
@@ -191,7 +191,7 @@ module.exports.ComponentsIcon = [
         discount: 1000,
         image: 'assets/images/keyboard.png',
         alt: 'Keyboard',
-        type: 'keyboard'
+        type: 'Keyboard'
     },
     {
         name: "Mouse",
@@ -199,7 +199,7 @@ module.exports.ComponentsIcon = [
         discount: 1000,
         image: 'assets/images/mouse.png',
         alt: 'Mouse',
-        type: 'mouse'
+        type: 'Mouse'
     },
 ]
 

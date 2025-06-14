@@ -11,6 +11,7 @@ export class AppComponent {
   public isScrolled = false;
   public hideHeader = false;
   private lastScrollTop: any = 0;
+  public loading = false;
 
   @HostListener('window:scroll', [])
   onWindowScroll() {

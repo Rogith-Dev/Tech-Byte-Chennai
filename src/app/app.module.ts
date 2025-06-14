@@ -19,12 +19,15 @@ import { MatSidenavModule } from "@angular/material/sidenav";
 import { MatListModule } from "@angular/material/list";
 import { MatIconModule } from "@angular/material/icon";
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
 import { CommonModule } from '@angular/common';
 import { PCBuildComponent } from './pages/pc-build/pc-build.component';
 import { PCHardwareAddComponent } from './admin-page/pc-hardware-add/pc-hardware-add.component';
 import { PCHardwareViewComponent } from './admin-page/pc-hardware-view/pc-hardware-view.component';
 import { PCHardwareListComponent } from './admin-page/pc-hardware-list/pc-hardware-list.component';
 import { PCHardwareEditComponent } from './admin-page/pc-hardware-edit/pc-hardware-edit.component';
+import { LoaderComponent } from './components/loader/loader.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +39,8 @@ import { PCHardwareEditComponent } from './admin-page/pc-hardware-edit/pc-hardwa
     PCHardwareAddComponent,
     PCHardwareViewComponent,
     PCHardwareEditComponent,
-    PCHardwareListComponent
+    PCHardwareListComponent,
+    LoaderComponent
   ],
   imports: [
     BrowserModule,
@@ -55,7 +59,9 @@ import { PCHardwareEditComponent } from './admin-page/pc-hardware-edit/pc-hardwa
     MatSidenavModule,
     MatListModule,
     MatIconModule,
-    MatSlideToggleModule
+    MatPaginatorModule,
+    MatSlideToggleModule,
+    MatTableModule
   ],
   providers: [],
   bootstrap: [AppComponent]

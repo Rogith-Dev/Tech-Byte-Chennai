@@ -71,7 +71,7 @@ exports.updateProduct = async (req, res) => {
         };
 
         if (req.file) {
-            updateData.image = req.file.filename; // or store path, originalname, etc.
+            updateData.filePath = req.file ? `http://localhost:3000/uploads/${req.file.filename}` : '';
         }
 
         const updatedProduct = await Product.findByIdAndUpdate(productId, updateData, { new: true });
@@ -91,3 +91,26 @@ exports.getAllForms = async (req, res) => {
         res.status(500).json({ error: err.message });
     }
 };
+
+exports.getProductListByName = async (req, res) => {
+    try {
+        let input = req.body;
+        const result = await Product.find({ productType: input.productType });
+        res.status(200).json(result);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+};
+
+exports.getProductsByFilter = async (req, res) => {
+    try {
+        let input = req.body;
+        const result = await Product.find({
+            name: { $regex: input.filter, $options: 'i' }
+        });
+        res.status(200).json(result);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+}

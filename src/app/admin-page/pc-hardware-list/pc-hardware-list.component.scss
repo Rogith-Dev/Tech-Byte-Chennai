@@ -1,0 +1,49 @@
+.mat-header-cell,
+.mat-cell {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.mat-column-index {
+    max-width: 40px;
+    text-align: center;
+}
+
+.mat-column-image {
+    max-width: 80px;
+}
+
+.mat-column-name {
+    max-width: 400px;
+}
+
+.mat-column-type {
+    max-width: 150px;
+}
+
+.mat-column-originalPrice,
+.mat-column-sellingPrice {
+    max-width: 190px;
+    text-align: right;
+}
+
+.mat-column-status {
+    max-width: 100px;
+}
+
+.mat-column-actions {
+    max-width: 180px;
+    text-align: center;
+    justify-content: center;
+}
+
+.mat-row {
+  border-bottom: 10px solid transparent;
+}
+
+.mat-table {
+  border-collapse: separate;
+  border-spacing: 0 10px;
+  background-color: red;
+}

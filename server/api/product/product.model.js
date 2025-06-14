@@ -9,6 +9,7 @@ const productSchema = new mongoose.Schema({
     originalPrice: Number,
     productType: String,
     filePath: String,
+    count: { type: Number, default: 1 },
     isActive: Boolean
 });
 

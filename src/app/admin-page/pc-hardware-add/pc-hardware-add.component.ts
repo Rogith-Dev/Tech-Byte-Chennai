@@ -5,6 +5,7 @@ import * as _ from 'lodash';
 import ServerConstant from '../../../../server/constant/constant';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-pc-hardware-add',
@@ -18,7 +19,7 @@ export class PCHardwareAddComponent {
   public serverConstant = ServerConstant;
 
   constructor(
-    private fb: FormBuilder, private http: HttpClient) {
+    private fb: FormBuilder, private http: HttpClient, private route: Router) {
   }
 
 
@@ -39,7 +40,7 @@ export class PCHardwareAddComponent {
       productType: [Validators.required],
       sellingPrice: [null, Validators.required],
       originalPrice: [null, Validators.required],
-      isActive: ['']
+      isActive: [true]
     });
 
   }
@@ -68,6 +69,7 @@ export class PCHardwareAddComponent {
     this.http.post('http://localhost:3000/api/product/createproduct', formData).subscribe({
       next: (res: any) => {
         alert('Saved');
+        this.route.navigate(['/pc-hardware-list']);
       },
       error: (err) => {
         console.log('error', err);

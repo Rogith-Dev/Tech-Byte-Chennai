@@ -4,6 +4,8 @@ import { debounceTime, fromEvent, map } from 'rxjs';
 
 //@ts-ignore
 import ServerConstant from '../../../../server/constant/constant';
+import { HttpService } from 'src/app/services/http-service/http.service';
+import { HttpClient } from '@angular/common/http';
 
 
 declare var bootstrap: any;
@@ -18,27 +20,19 @@ export class PCBuildComponent {
 
   public isScrolled = false;
   public serverConstant = ServerConstant;
-  public processorTypes: any;
+  public componentTypes: any;
   public sortOption: string = 'priceLowHigh';
   public searchTerm: string = '';
-  filteredItems: any;
+  public filteredItems: any;
+  public loading = false;
 
-  colorFilters = [
-    { name: 'Brown', count: 3 },
-    { name: 'Black', count: 3 },
-    { name: 'SteelBlue', count: 2 },
-    { name: 'DarkSeaGreen', count: 2 },
-    { name: 'RosyBrown', count: 1 },
-    { name: 'SandyBrown', count: 1 },
-    { name: 'Gray', count: 1 }
-  ];
   public selectedComponent: any;
-  public brands = ['AMD', 'Intel'];
+  public brands = _.values(ServerConstant.ProcessorCatagory.Brand);
   public cpuSupports = ['AMD AM4', 'AMD AM5', 'Intel LGA 1200', 'Intel LGA 1700', 'SWRX8'];
   public selectedComponents: { [key: string]: any } = {};
   modalInstance: any;
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   @HostListener('window:scroll', [])
   onWindowScroll(): void {
@@ -46,7 +40,7 @@ export class PCBuildComponent {
   }
 
   ngOnInit() {
-    this.filteredItems = this.processorTypes;
+    this.filteredItems = this.componentTypes;
 
   }
 
@@ -64,11 +58,11 @@ export class PCBuildComponent {
 
   public filterItems() {
     if (!this.searchTerm) {
-      this.getComponentList(this.selectedComponent);
+      // this.getComponentList(this.selectedComponent);
       return;
     }
     const lowerTerm = this.searchTerm.toLowerCase();
-    this.processorTypes = this.processorTypes.filter((item: any) =>
+    this.componentTypes = this.componentTypes.filter((item: any) =>
       item.title.toLowerCase().includes(lowerTerm)
     );
   }
@@ -76,21 +70,44 @@ export class PCBuildComponent {
   public sortProducts() {
     switch (this.sortOption) {
       case 'priceLowHigh':
-        this.processorTypes.sort((a: { price: number; }, b: { price: number; }) => a.price - b.price);
+        this.componentTypes.sort((a: { sellingPrice: number; }, b: { sellingPrice: number; }) => a.sellingPrice - b.sellingPrice);
         break;
       case 'priceHighLow':
-        this.processorTypes.sort((a: { price: number; }, b: { price: number; }) => b.price - a.price);
+        this.componentTypes.sort((a: { sellingPrice: number; }, b: { sellingPrice: number; }) => b.sellingPrice - a.sellingPrice);
         break;
     }
   }
 
+  public onChangeBrand(brand: any) {
+    this.loading = true;
+    this.http.post('http://localhost:3000/api/product/getProductsByFilter', { filter: brand }).subscribe({
+      next: (res: any) => {
+        this.componentTypes = res;
+        this.loading = false;
+      },
+      error: (err: any) => {
+
+      }
+    })
+  }
   public openComponentsModel(data: any) {
-    this.getComponentList(data);
-    const modalElement = document.getElementById('componentModal');
-    if (modalElement) {
-      this.modalInstance = new bootstrap.Modal(modalElement);
-      this.modalInstance.show();
-    }
+    this.loading = true;
+
+    this.http.post('http://localhost:3000/api/product/getProductListByName', { productType: data.name }).subscribe({
+      next: (res: any) => {
+        this.componentTypes = res;
+        this.loading = false;
+
+        const modalElement = document.getElementById('componentModal');
+        if (modalElement) {
+          this.modalInstance = new bootstrap.Modal(modalElement);
+          this.modalInstance.show();
+        }
+      }, error: (err: any) => {
+        console.log(err);
+      }
+    })
+
   }
 
   public closeModal() {
@@ -100,16 +117,8 @@ export class PCBuildComponent {
     }
   }
 
-  private getComponentList(data: any) {
-    this.selectedComponent = data;
-    let selectedString = data.name.toLowerCase();
-    const foundKey = Object.keys(this.serverConstant.PCComponentTypes).find(key => key.toLowerCase().includes(selectedString));
-    if (foundKey) {
-      this.processorTypes = _.values(this.serverConstant.PCComponentTypes[foundKey]);
-    }
-  }
   public onSelectItemFromModel(item: any) {
-    const key = item.type;
+    const key = item.productType;
     if (key) {
       this.selectedComponents[key] = item;
     }

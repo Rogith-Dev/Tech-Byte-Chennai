@@ -1,11 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import * as _ from 'lodash';
 
 //@ts-ignore
 import ServerConstant from '../../../../server/constant/constant';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { HttpService } from 'src/app/services/http-service/http.service';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-pc-hardware-list',
@@ -18,6 +20,10 @@ export class PCHardwareListComponent {
   public selectedFile: File | null = null;
   public serverConstant = ServerConstant;
   public pcComponents: any;
+  public displayedColumns: string[] = ['index', 'image', 'name', 'type', 'originalPrice', 'sellingPrice', 'status', 'actions'];
+  dataSource = new MatTableDataSource<any>();
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(private http: HttpClient) {
   }
@@ -25,10 +31,11 @@ export class PCHardwareListComponent {
 
   ngOnInit() {
 
-    this.http.get('http://localhost:3000/api/product/getProductList').subscribe({
+    this.http.get('api/product/getProductList').subscribe({
       // this.http.httpGetMethod('http://localhost:3000/api/product/getProductList').subscribe({
       next: (res: any) => {
         this.pcComponents = res.data;
+        this.dataSource.data = this.pcComponents;
         console.log(res);
       },
       error: (err) => {
@@ -36,6 +43,10 @@ export class PCHardwareListComponent {
       }
     })
 
+  }
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
   }
 
   public onView(component: any) {
