@@ -29,7 +29,7 @@ export class PCHardwareViewComponent {
 
     let productId = this.route.snapshot.paramMap.get('id') || '';
 
-    this.http.get(`http://localhost:3000/api/product/getProductDetail/${productId}`).subscribe({
+    this.http.get(`https://tech-byte-chennai.onrender.com/api/product/getProductDetail/${productId}`).subscribe({
       next: (res: any) => {
         this.pcComponentObj = res;
       },

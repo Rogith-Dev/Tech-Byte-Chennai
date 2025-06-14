@@ -80,7 +80,7 @@ export class PCBuildComponent {
 
   public onChangeBrand(brand: any) {
     this.loading = true;
-    this.http.post('http://localhost:3000/api/product/getProductsByFilter', { filter: brand }).subscribe({
+    this.http.post('https://tech-byte-chennai.onrender.com/api/product/getProductsByFilter', { filter: brand }).subscribe({
       next: (res: any) => {
         this.componentTypes = res;
         this.loading = false;
@@ -93,7 +93,7 @@ export class PCBuildComponent {
   public openComponentsModel(data: any) {
     this.loading = true;
 
-    this.http.post('http://localhost:3000/api/product/getProductListByName', { productType: data.name }).subscribe({
+    this.http.post('https://tech-byte-chennai.onrender.com/api/product/getProductListByName', { productType: data.name }).subscribe({
       next: (res: any) => {
         this.componentTypes = res;
         this.loading = false;

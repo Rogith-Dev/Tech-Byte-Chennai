@@ -49,7 +49,7 @@ export class PCHardwareEditComponent {
 
 
   private loadProduct() {
-    this.http.get(`http://localhost:3000/api/product/getProductDetail/${this.productId}`).subscribe({
+    this.http.get(`https://tech-byte-chennai.onrender.com/api/product/getProductDetail/${this.productId}`).subscribe({
       next: (res: any) => {
 
         this.pcComponentEditForm.patchValue({
@@ -90,7 +90,7 @@ export class PCHardwareEditComponent {
       formData.append('file', this.selectedFile);
     }
 
-    this.http.post('http://localhost:3000/api/product/update', formData).subscribe({
+    this.http.post('https://tech-byte-chennai.onrender.com/api/product/update', formData).subscribe({
       next: () => {
         alert('Updated successfully');
         this.router.navigate(['/pc-hardware-list']);

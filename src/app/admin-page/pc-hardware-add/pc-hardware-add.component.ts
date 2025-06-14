@@ -25,7 +25,7 @@ export class PCHardwareAddComponent {
 
   ngOnInit() {
 
-    this.http.get('http://localhost:3000/api/product/getproduct').subscribe({
+    this.http.get('https://tech-byte-chennai.onrender.com/api/product/getproduct').subscribe({
       next: (res: any) => {
         console.log('resposne', res);
       },
@@ -66,7 +66,7 @@ export class PCHardwareAddComponent {
     formData.append('isActive', this.pcComponentAddForm.get('isActive')?.value);
     formData.append('file', this.selectedFile);
 
-    this.http.post('http://localhost:3000/api/product/createproduct', formData).subscribe({
+    this.http.post('https://tech-byte-chennai.onrender.com/api/product/createproduct', formData).subscribe({
       next: (res: any) => {
         alert('Saved');
         this.route.navigate(['/pc-hardware-list']);
