@@ -1,6 +1,7 @@
 import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
 import * as _ from 'lodash';
 import { debounceTime, fromEvent, map } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 //@ts-ignore
 import ServerConstant from '../../../../server/constant/constant';
@@ -80,7 +81,7 @@ export class PCBuildComponent {
 
   public onChangeBrand(brand: any) {
     this.loading = true;
-    this.http.post('https://tech-byte-chennai.onrender.com/api/product/getProductsByFilter', { filter: brand }).subscribe({
+    this.http.post(environment.apiUrl + '/api/product/getProductsByFilter', { filter: brand }).subscribe({
       next: (res: any) => {
         this.componentTypes = res;
         this.loading = false;
@@ -93,7 +94,7 @@ export class PCBuildComponent {
   public openComponentsModel(data: any) {
     this.loading = true;
 
-    this.http.post('https://tech-byte-chennai.onrender.com/api/product/getProductListByName', { productType: data.name }).subscribe({
+    this.http.post(environment.apiUrl + '/api/product/getProductListByName', { productType: data.name }).subscribe({
       next: (res: any) => {
         this.componentTypes = res;
         this.loading = false;

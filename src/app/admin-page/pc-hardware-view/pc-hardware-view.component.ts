@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import * as _ from 'lodash';
+import { environment } from 'src/environments/environment';
 
 //@ts-ignore
 import ServerConstant from '../../../../server/constant/constant';
@@ -29,7 +30,7 @@ export class PCHardwareViewComponent {
 
     let productId = this.route.snapshot.paramMap.get('id') || '';
 
-    this.http.get(`https://tech-byte-chennai.onrender.com/api/product/getProductDetail/${productId}`).subscribe({
+    this.http.get(environment.apiUrl + `/api/product/getProductDetail/${productId}`).subscribe({
       next: (res: any) => {
         this.pcComponentObj = res;
       },

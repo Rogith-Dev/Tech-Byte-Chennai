@@ -8,11 +8,11 @@ if (process.env.NODE_ENV === 'development') {
 }
 app.use(express.json());
 
+// origin: ['https://tech-byte-chennai.vercel.app'], // Replace with your frontend origin
 app.use(cors({
-  // origin: 'https://tech-byte-chennai.vercel.app',
-  origin: ['https://tech-byte-chennai.vercel.app'], // Replace with your frontend origin
+  origin: '*',
   methods: ['GET', 'POST', 'OPTIONS'],
-  // origin: 'http://localhost:4200',
+  allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true
 }));
 

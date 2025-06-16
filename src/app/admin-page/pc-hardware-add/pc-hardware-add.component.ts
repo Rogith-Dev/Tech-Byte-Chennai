@@ -6,6 +6,7 @@ import ServerConstant from '../../../../server/constant/constant';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-pc-hardware-add',
@@ -25,7 +26,7 @@ export class PCHardwareAddComponent {
 
   ngOnInit() {
 
-    this.http.get('https://tech-byte-chennai.onrender.com/api/product/getproduct').subscribe({
+    this.http.get(environment.apiUrl + '/api/product/getproduct').subscribe({
       next: (res: any) => {
         console.log('resposne', res);
       },
@@ -66,7 +67,7 @@ export class PCHardwareAddComponent {
     formData.append('isActive', this.pcComponentAddForm.get('isActive')?.value);
     formData.append('file', this.selectedFile);
 
-    this.http.post('https://tech-byte-chennai.onrender.com/api/product/createproduct', formData).subscribe({
+    this.http.post(environment.apiUrl + '/api/product/createproduct', formData).subscribe({
       next: (res: any) => {
         alert('Saved');
         this.route.navigate(['/pc-hardware-list']);
