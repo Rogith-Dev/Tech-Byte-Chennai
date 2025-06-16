@@ -9,8 +9,8 @@ if (process.env.NODE_ENV === 'development') {
 app.use(express.json());
 
 app.use(cors({
-  // origin: 'http://localhost:52160',
-  origin: 'http://localhost:4200',
+  origin: 'https://tech-byte-chennai.vercel.app',
+  // origin: 'http://localhost:4200',
   credentials: true
 }));
 
