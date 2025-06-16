@@ -37,7 +37,7 @@ exports.getProductById = async (req, res) => {
 exports.createProduct = async (req, res) => {
     try {
         const { name, originalPrice, sellingPrice, productType, isActive } = req.body;
-        const filePath = req.file ? `http://localhost:3000/uploads/${req.file.filename}` : '';
+        const filePath = req.file ? `https://tech-byte-chennai.onrender.com/uploads/${req.file.filename}` : '';
 
         const product = new Product({ name, originalPrice, sellingPrice, productType, isActive, filePath });
         await product.save();
@@ -71,7 +71,7 @@ exports.updateProduct = async (req, res) => {
         };
 
         if (req.file) {
-            updateData.filePath = req.file ? `http://localhost:3000/uploads/${req.file.filename}` : '';
+            updateData.filePath = req.file ? `https://tech-byte-chennai.onrender.com/uploads/${req.file.filename}` : '';
         }
 
         const updatedProduct = await Product.findByIdAndUpdate(productId, updateData, { new: true });
