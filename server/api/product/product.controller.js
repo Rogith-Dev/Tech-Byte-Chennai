@@ -1,5 +1,5 @@
 const Product = require('./product.model');
-const BASE_URL = process.env.BASE_URL || 'http://localhost:3000';
+// const BASE_URL = process.env.BASE_URL || 'http://localhost:3000';
 
 exports.getAllProducts = async (req, res) => {
     try {
@@ -38,7 +38,7 @@ exports.getProductById = async (req, res) => {
 exports.createProduct = async (req, res) => {
     try {
         const { name, originalPrice, sellingPrice, productType, isActive } = req.body;
-        const filePath = req.file ? BASE_URL + `/uploads/${req.file.filename}` : '';
+        const filePath = req.file ? `/uploads/${req.file.filename}` : '';
 
         const product = new Product({ name, originalPrice, sellingPrice, productType, isActive, filePath });
         await product.save();
@@ -72,7 +72,7 @@ exports.updateProduct = async (req, res) => {
         };
 
         if (req.file) {
-            updateData.filePath = req.file ? BASE_URL + `/uploads/${req.file.filename}` : '';
+            updateData.filePath = req.file ? `/uploads/${req.file.filename}` : '';
         }
 
         const updatedProduct = await Product.findByIdAndUpdate(productId, updateData, { new: true });
