@@ -31,7 +31,7 @@ export class PCHardwareListComponent {
 
   ngOnInit() {
 
-    this.http.get('api/product/getProductList').subscribe({
+    this.http.get('https://tech-byte-chennai.onrender.com/api/product/getProductList').subscribe({
       // this.http.httpGetMethod('http://localhost:3000/api/product/getProductList').subscribe({
       next: (res: any) => {
         this.pcComponents = res.data;
