@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const createDefaultAdmin = require('./utils/createDefaultAdmin');
 require('dotenv').config({ path: './config.env' });
 
 
@@ -7,7 +8,10 @@ const app = require('./app');
 //db Configuration
 
 mongoose.connect(process.env.DATABASE)
-  .then(() => console.log('✅ Connected to MongoDB'))
+  .then(() => {
+    console.log('✅ Connected to MongoDB');
+    createDefaultAdmin();
+  })
   .catch((err) => console.error('❌ MongoDB connection error:', err));
 
 

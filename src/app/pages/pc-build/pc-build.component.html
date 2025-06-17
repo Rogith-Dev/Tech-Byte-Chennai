@@ -139,7 +139,7 @@
               </div>
 
               <!-- Product list -->
-              <div class="row" style="max-height: 50vh; overflow-y: auto;">
+              <div class="row" style="max-height: 50vh; overflow-y: auto;" #scrollContainer>
                 <div class="col-md-12 mb-3" *ngFor="let product of componentTypes">
                   <div class="d-flex border-bottom p-3 align-items-center">
                     <img [src]="product.filePath | apiUrl" class="me-3 p-1 border" width="80" alt="Product Image" />
@@ -151,9 +151,11 @@
                         <button class="btn btn-primary" (click)="onSelectItemFromModel(product)">Select</button>
                         <div class="ms-auto text-end">
                           <div *ngIf="product.originalPrice">
-                            <small class="text-decoration-line-through text-muted">₹{{ product.originalPrice }}</small>
+                            <small class="text-decoration-line-through text-muted">{{ product.originalPrice |
+                              currency:'INR':'symbol':'1.0-0' }}</small>
                           </div>
-                          <div class="fs-5 text-danger">₹{{ product.sellingPrice }}</div>
+                          <div class="fs-5 text-danger">{{ product.sellingPrice | currency:'INR':'symbol':'1.0-0' }}
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -162,14 +164,10 @@
               </div>
 
               <!-- Pagination -->
-              <div class="d-flex justify-content-center my-4">
-                <nav>
-                  <ul class="pagination">
-                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                  </ul>
-                </nav>
-              </div>
+              <mat-paginator [length]="totalItems" [pageSize]="pageSize" [pageSizeOptions]="[20,40,60]"
+                (page)="onPageChange($event)">
+              </mat-paginator>
+
 
             </div>
           </div>

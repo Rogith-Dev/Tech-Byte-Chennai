@@ -9,15 +9,17 @@ import { PCHardwareEditComponent } from './admin-page/pc-hardware-edit/pc-hardwa
 import { PCHardwareListComponent } from './admin-page/pc-hardware-list/pc-hardware-list.component';
 import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent } from './auth/signup/signup.component';
+import { AuthGuard } from './auth/auth.guard';
+import { adminGuard } from './auth/admin.guard';
 
 const routes: Routes = [
-  { path: 'prebuild-pc-list', component: PreBuildPCListComponent },
+  { path: 'prebuild-pc-list', component: PreBuildPCListComponent, canActivate: [AuthGuard] },
   { path: 'prebuild-pc-detail', component: PreBuildPCDetailComponent },
   { path: 'pc-build', component: PCBuildComponent },
-  { path: 'pc-hardware-add', component: PCHardwareAddComponent },
-  { path: 'pc-hardware-view/:id', component: PCHardwareViewComponent },
-  { path: 'pc-hardware-edit/:id', component: PCHardwareEditComponent },
-  { path: 'pc-hardware-list', component: PCHardwareListComponent },
+  { path: 'pc-hardware-add', component: PCHardwareAddComponent, canActivate: [adminGuard] },
+  { path: 'pc-hardware-view/:id', component: PCHardwareViewComponent, canActivate: [adminGuard] },
+  { path: 'pc-hardware-edit/:id', component: PCHardwareEditComponent, canActivate: [adminGuard] },
+  { path: 'pc-hardware-list', component: PCHardwareListComponent, canActivate: [adminGuard] },
   { path: 'login', component: LoginComponent, data: { hideHeader: true } },
   { path: 'signup', component: SignupComponent, data: { hideHeader: true } },
 

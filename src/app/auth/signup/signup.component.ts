@@ -1,7 +1,8 @@
-import { CommonModule } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AlertService } from 'src/app/services/alert-service/alert.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
     selector: 'app-signup',
@@ -10,36 +11,68 @@ import { RouterModule } from '@angular/router';
 })
 export class SignupComponent {
 
-    public registerForm!: FormGroup;
+    public signupForm!: FormGroup;
+    public elementType: string | undefined;
 
-    constructor(private fb: FormBuilder) {
+    constructor(
+        private fb: FormBuilder,
+        private http: HttpClient,
+        private alertService: AlertService
+    ) {
     }
 
     ngOnInit() {
-        this.registerForm = this.fb.group({
+        this.signupForm = this.fb.group({
+            name: ['', Validators.required],
             email: ['', [Validators.required, Validators.email]],
-            firstName: ['', Validators.required],
-            lastName: ['', Validators.required],
-            password: ['', Validators.required],
+            password: ['', [Validators.required, Validators.minLength(6)]],
             confirmPassword: ['', Validators.required],
             terms: ['', Validators.required],
+        }, { validator: this.passwordsMatchValidator });
+    }
+
+    public onSubmit() {
+        if (this.signupForm.invalid) return;
+
+        this.http.post(environment.apiUrl + '/api/user/signup', this.signupForm.value).subscribe({
+            next: (res: any) => {
+                this.signupForm.reset();
+                this.alertService.showSuccessToasterMessage(res.message);
+            },
+            error: (err) => {
+                let message = err.error.message || 'Signup failed';
+                this.alertService.showErrorToasterMessage(message);
+            }
         });
     }
 
-    onSubmit() {
-        // if (this.registerForm.valid) {
-        //     this.httpService.post(this.registerForm.value).subscribe({
-        //         next: (resp: any) => {
-        //             console.log(resp);
-        //             console.log('Account created');
+    private passwordsMatchValidator(formGroup: any) {
+        const password = formGroup.get('password').value;
+        const confirmPassword = formGroup.get('confirmPassword').value;
+        return password === confirmPassword ? null : { mismatch: true };
+    }
 
-        //         },
-        //         error: (err) => {
-        //             // this.alertService.showErrorToasterMessage('Error occurred while fetching customer list');
-        //         },
-        //         complete: () => console.log('complete')
-        //     })
-        // }
+    public getIcon() {
+        if (this.elementType === 'text') {
+            return 'fa fa-eye'
+        } else {
+            return 'fa fa-eye-slash';
+        }
+    }
+
+    public togglePassword(id: any) {
+        const element = document.getElementById(id);
+        // @ts-ignore
+        this.elementType = element.type;
+        if (this.elementType === 'password') {
+            this.elementType = 'text';
+            // @ts-ignore
+            element.type = 'text';
+        } else {
+            this.elementType = 'password';
+            // @ts-ignore
+            element.type = 'password';
+        }
     }
 
 }

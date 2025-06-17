@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
+import { AuthService } from './services/auth-service/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +11,7 @@ export class AppComponent {
 
   public showHeader = true;
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private auth: AuthService) {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         const currentRoute = this.router.routerState.root.firstChild;
@@ -20,7 +21,11 @@ export class AppComponent {
   }
 
   ngOnInit() {
-
+    setInterval(() => {
+      if (this.auth.isTokenExpired()) {
+        this.auth.logout(); // Auto logout
+      }
+    }, 60000); // check every 1 minute
   }
 
 }

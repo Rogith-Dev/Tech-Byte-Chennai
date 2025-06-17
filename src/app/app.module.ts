@@ -32,6 +32,8 @@ import { ApiUrlPipe } from './services/custom-pipe/api-url.pipe';
 import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { HeaderComponent } from './components/header/header.component';
+import { AdminDashboardComponent } from './root-admin/admin-dashboard/admin-dashboard.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -48,7 +50,8 @@ import { HeaderComponent } from './components/header/header.component';
     ApiUrlPipe,
     LoginComponent,
     SignupComponent,
-    HeaderComponent
+    HeaderComponent,
+    AdminDashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -69,7 +72,8 @@ import { HeaderComponent } from './components/header/header.component';
     MatIconModule,
     MatPaginatorModule,
     MatSlideToggleModule,
-    MatTableModule
+    MatTableModule,
+    NgxPaginationModule
   ],
   providers: [],
   bootstrap: [AppComponent]

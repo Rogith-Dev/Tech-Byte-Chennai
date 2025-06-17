@@ -5,3 +5,13 @@
 .height-5 {
     height: 5px
 }
+::ng-deep .mat-paginator,
+::ng-deep .mat-select-panel,
+::ng-deep .mat-menu-panel {
+  z-index: 1061 !important; // Higher than Bootstrap modal (1055-1060)
+  position: relative;
+}
+
+::ng-deep .cdk-overlay-container {
+  z-index: 1061 !important;
+}

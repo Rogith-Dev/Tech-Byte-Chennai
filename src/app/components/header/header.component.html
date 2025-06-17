@@ -84,7 +84,20 @@
         <div class="d-flex justify-content-center gap-2">
           <button class="btn bg-white"><i class="fa fa-heart-o"></i></button>
           <button class="btn bg-white"><i class="fa fa-shopping-basket"></i></button>
-          <button class="btn bg-white"><i class="fa fa-user-o"></i></button>
+
+          <!-- Profile Button -->
+          <div class="dropdown">
+            <button class="btn bg-white dropdown-toggle" type="button" id="userDropdown" data-bs-toggle="dropdown"
+              aria-expanded="false">
+              <i class="fa fa-user-o">
+                <span *ngIf="loggedUserName" class="ms-2">{{ loggedUserName }}</span>
+              </i>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+              <li><a class="dropdown-item" (click)="logout()">Logout</a></li>
+            </ul>
+          </div>
+
         </div>
 
       </div>

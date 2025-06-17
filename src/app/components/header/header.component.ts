@@ -14,6 +14,7 @@ export class HeaderComponent {
   public hideHeader = false;
   private lastScrollTop: any = 0;
   public loading = false;
+  public loggedUserName: any;
 
   @HostListener('window:scroll', [])
   onWindowScroll() {
@@ -32,6 +33,10 @@ export class HeaderComponent {
     });
   }
 
+  ngOnInit() {
+    this.loggedUserName = JSON.parse(localStorage.getItem('user') || '{}')?.name;
+  }
+
   closeNavbar() {
     const navbarCollapse = document.getElementById('navbarNav');
     if (navbarCollapse?.classList.contains('show')) {
@@ -39,6 +44,11 @@ export class HeaderComponent {
         toggle: true
       });
     }
+  }
+
+  public logout() {
+    localStorage.clear();
+    this.router.navigate(['/login']);
   }
 
 }

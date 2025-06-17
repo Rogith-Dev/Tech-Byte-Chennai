@@ -7,6 +7,7 @@ import { environment } from 'src/environments/environment';
 import ServerConstant from '../../../../server/constant/constant';
 import { HttpService } from 'src/app/services/http-service/http.service';
 import { HttpClient } from '@angular/common/http';
+import { PageEvent } from '@angular/material/paginator';
 
 
 declare var bootstrap: any;
@@ -18,6 +19,8 @@ declare var bootstrap: any;
 })
 export class PCBuildComponent {
   @ViewChild('searchInput') searchInput!: ElementRef;
+  @ViewChild('scrollContainer') scrollContainer!: ElementRef;
+
 
   public isScrolled = false;
   public serverConstant = ServerConstant;
@@ -26,6 +29,12 @@ export class PCBuildComponent {
   public searchTerm: string = '';
   public filteredItems: any;
   public loading = false;
+
+  // Pagination
+  public page = 1;
+  public pageSize = 20;
+  public totalItems = 0;
+
 
   public selectedComponent: any;
   public brands = _.values(ServerConstant.ProcessorCatagory.Brand);
@@ -53,33 +62,58 @@ export class PCBuildComponent {
       )
       .subscribe((value: string) => {
         this.searchTerm = value;
-        this.filterItems();
+        this.page = 1; // reset to first page
+        this.applyFilters();
       });
   }
 
-  public filterItems() {
-    if (!this.searchTerm) {
-      // this.getComponentList(this.selectedComponent);
-      return;
+  applyFilters() {
+    let items = [...this.filteredItems];
+
+    // Filter
+    if (this.searchTerm) {
+      const term = this.searchTerm.toLowerCase();
+      items = items.filter(item => item.name.toLowerCase().includes(term));
     }
-    const lowerTerm = this.searchTerm.toLowerCase();
-    this.componentTypes = this.componentTypes.filter((item: any) =>
-      item.title.toLowerCase().includes(lowerTerm)
-    );
+
+    // Sort
+    switch (this.sortOption) {
+      case 'priceLowHigh':
+        items.sort((a, b) => a.sellingPrice - b.sellingPrice);
+        break;
+      case 'priceHighLow':
+        items.sort((a, b) => b.sellingPrice - a.sellingPrice);
+        break;
+    }
+
+    // Pagination
+    this.totalItems = items.length;
+    const start = (this.page - 1) * this.pageSize;
+    const end = start + this.pageSize;
+    this.componentTypes = items.slice(start, end);
   }
 
   public sortProducts() {
-    switch (this.sortOption) {
-      case 'priceLowHigh':
-        this.componentTypes.sort((a: { sellingPrice: number; }, b: { sellingPrice: number; }) => a.sellingPrice - b.sellingPrice);
-        break;
-      case 'priceHighLow':
-        this.componentTypes.sort((a: { sellingPrice: number; }, b: { sellingPrice: number; }) => b.sellingPrice - a.sellingPrice);
-        break;
+    this.page = 1; // reset to first page
+    this.applyFilters();
+    if (this.scrollContainer && this.scrollContainer.nativeElement) {
+      this.scrollContainer.nativeElement.scrollTop = 0;
+    }
+  }
+  public onPageChange(event: PageEvent) {
+    this.pageSize = event.pageSize;
+    this.page = event.pageIndex + 1;
+    this.applyFilters();
+
+    if (this.scrollContainer && this.scrollContainer.nativeElement) {
+      this.scrollContainer.nativeElement.scrollTop = 0;
     }
   }
 
   public onChangeBrand(brand: any) {
+
+    // this.componentTypes = this.filteredItems.filter((item: any) => item.brand === brand);
+
     this.loading = true;
     this.http.post(environment.apiUrl + '/api/product/getProductsByFilter', { filter: brand }).subscribe({
       next: (res: any) => {
@@ -97,6 +131,9 @@ export class PCBuildComponent {
     this.http.post(environment.apiUrl + '/api/product/getProductListByName', { productType: data.name }).subscribe({
       next: (res: any) => {
         this.componentTypes = res;
+        this.filteredItems = res;
+        this.totalItems = data.length;
+        this.applyFilters();
         this.loading = false;
 
         const modalElement = document.getElementById('componentModal');

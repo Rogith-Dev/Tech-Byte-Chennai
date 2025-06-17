@@ -1,5 +1,9 @@
+import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AlertService } from 'src/app/services/alert-service/alert.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
     selector: 'app-login',
@@ -12,8 +16,12 @@ export class LoginComponent {
     public loginForm!: FormGroup;
     public elementType: string | undefined;
 
-    constructor(private fb: FormBuilder) {
-    }
+    constructor(
+        private fb: FormBuilder,
+        private http: HttpClient,
+        private router: Router,
+        private alertService: AlertService
+    ) { }
 
     ngOnInit() {
         this.loginForm = this.fb.group({
@@ -23,11 +31,23 @@ export class LoginComponent {
     }
 
     onSubmit() {
-        if (this.loginForm.valid) {
-            console.log('Login Data:', this.loginForm.value);
-        } else {
-            this.loginForm.markAllAsTouched(); // Show errors on submit
+        if (this.loginForm.invalid) {
+            this.loginForm.markAllAsTouched();
+            return;
         }
+
+        console.log('Login Data:', this.loginForm.value);
+        this.http.post(environment.apiUrl + '/api/user/login', this.loginForm.value).subscribe({
+            next: (res: any) => {
+                localStorage.setItem('token', res.token);
+                localStorage.setItem('user', JSON.stringify(res.user));
+                this.router.navigate(['/pc-build']);
+            },
+            error: (err) => {
+                let message = err.error.message || 'Login failed';
+                this.alertService.showErrorToasterMessage(message);
+            }
+        });
     }
 
     public getIcon() {
