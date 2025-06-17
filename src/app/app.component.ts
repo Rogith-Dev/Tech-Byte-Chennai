@@ -1,5 +1,5 @@
-// app.component.ts
-import { Component, HostListener } from '@angular/core';
+import { Component } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -7,25 +7,20 @@ import { Component, HostListener } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  public username = 'Rogith';
-  public isScrolled = false;
-  public hideHeader = false;
-  private lastScrollTop: any = 0;
-  public loading = false;
 
-  @HostListener('window:scroll', [])
-  onWindowScroll() {
-    const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
-    this.isScrolled = currentScroll > 50;
-    if (currentScroll > this.lastScrollTop && currentScroll > 3) {
-      this.hideHeader = true;
-    } else {
-      this.hideHeader = false;
-    }
-    this.lastScrollTop = currentScroll <= 0 ? 0 : currentScroll; // For Mobile or negative scrolling
+  public showHeader = true;
+
+  constructor(private router: Router) {
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        const currentRoute = this.router.routerState.root.firstChild;
+        this.showHeader = !(currentRoute?.snapshot.data['hideHeader']);
+      }
+    });
   }
-  constructor() { }
 
   ngOnInit() {
+
   }
+
 }

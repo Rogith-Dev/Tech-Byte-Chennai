@@ -19,8 +19,8 @@ export class PCHardwareViewComponent {
   public pcComponentViewForm!: FormGroup;
   public selectedFile: File | null = null;
   public serverConstant = ServerConstant;
-  pcComponentObj: any;
-  previewUrl: string | ArrayBuffer | null = null;
+  public pcComponentObj: any;
+  public previewUrl: string | ArrayBuffer | null = null;
 
   constructor(private fb: FormBuilder, private http: HttpClient, private route: ActivatedRoute) {
   }

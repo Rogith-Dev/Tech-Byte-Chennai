@@ -1,0 +1,94 @@
+<!-- header.component.html -->
+<header #headerRef [class.visible]="isScrolled"
+  class="d-none d-lg-flex justify-content-between align-items-center bg-blk border-bottom header-padding px-4 py-2">
+  <!-- Email Contact -->
+  <div class="email-contact text-white d-flex align-items-center opacity-75 ps-5 ms-5">
+    <i class="fa fa-envelope me-2"></i>
+    <a class="text-white text-decoration-none me-3" href="mailto:techbytechennai@gmail.com">
+      {{'techbytechennai@gmail.com'}}
+    </a>
+    <i class="fa fa-phone me-2"></i>
+    <span>+91 9345678318</span>
+  </div>
+
+  <!-- Social Media Icons -->
+  <div class="social-icons pe-5 me-5 d-flex opacity-75">
+    <a href="https://facebook.com" target="_blank" class="text-white mx-2">
+      <i class="fa fa-facebook"></i>
+    </a>
+    <a href="https://twitter.com" target="_blank" class="text-white mx-2">
+      <i class="fa fa-twitter"></i>
+    </a>
+    <a href="https://www.instagram.com/techbytechennai" target="_blank" class="text-white mx-2">
+      <i class="fa fa-instagram"></i>
+    </a>
+    <a href="https://www.linkedin.com/in/rogith-t" target="_blank" class="text-white mx-2">
+      <i class="fa fa-linkedin"></i>
+    </a>
+  </div>
+</header>
+
+<nav #navbarRef [class.scrolled]="isScrolled" [class.hide-header]="hideHeader"
+  class="navbar navbar-expand-lg navbar-light shadow-sm px-3">
+  <div class="container-fluid">
+
+    <!-- Brand -->
+    <a class="navbar-brand d-flex align-items-center" routerLink="/">
+      <img src="../../../assets/images/horizontal-removebg-preview.png" alt="Logo" height="40" class="me-2" />
+    </a>
+
+    <!-- Toggler -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Navbar Content -->
+    <div class="collapse navbar-collapse" id="navbarNav">
+
+      <!-- Left Links -->
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/pc-build">PC Build</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/prebuild-pc-list">Pre Build PC</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="gamingDropdown" role="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            Gaming Gears
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="gamingDropdown">
+            <li><a class="dropdown-item" routerLink="/accessories/keyboards">Gaming Keyboards</a></li>
+            <li><a class="dropdown-item" routerLink="/accessories/mouse">High-Precision Mouse</a></li>
+            <li><a class="dropdown-item" routerLink="/accessories/headphones">Gaming Headphones</a></li>
+            <li><a class="dropdown-item" routerLink="/accessories/cables">Cables & Adapters</a></li>
+          </ul>
+        </li>
+      </ul>
+
+      <!-- Right: Search + Icons -->
+      <div
+        class="d-flex flex-column flex-lg-row align-items-stretch align-items-lg-center gap-2 search-with-icons w-lg-auto mt-2 mt-lg-0">
+
+        <!-- Search -->
+        <div class="input-group w-100 w-lg-auto">
+          <span class="input-group-text bg-white border-0 opacity-75 rounded-left">
+            <i class="bi bi-search"></i>
+          </span>
+          <input type="text" class="form-control border-0 rounded-right opacity-75 p-2" placeholder="Search Products">
+        </div>
+
+        <!-- Icons -->
+        <div class="d-flex justify-content-center gap-2">
+          <button class="btn bg-white"><i class="fa fa-heart-o"></i></button>
+          <button class="btn bg-white"><i class="fa fa-shopping-basket"></i></button>
+          <button class="btn bg-white"><i class="fa fa-user-o"></i></button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</nav>
+<app-loader *ngIf="loading"></app-loader>

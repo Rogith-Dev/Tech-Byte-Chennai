@@ -28,6 +28,10 @@ import { PCHardwareViewComponent } from './admin-page/pc-hardware-view/pc-hardwa
 import { PCHardwareListComponent } from './admin-page/pc-hardware-list/pc-hardware-list.component';
 import { PCHardwareEditComponent } from './admin-page/pc-hardware-edit/pc-hardware-edit.component';
 import { LoaderComponent } from './components/loader/loader.component';
+import { ApiUrlPipe } from './services/custom-pipe/api-url.pipe';
+import { LoginComponent } from './auth/login/login.component';
+import { SignupComponent } from './auth/signup/signup.component';
+import { HeaderComponent } from './components/header/header.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +44,11 @@ import { LoaderComponent } from './components/loader/loader.component';
     PCHardwareViewComponent,
     PCHardwareEditComponent,
     PCHardwareListComponent,
-    LoaderComponent
+    LoaderComponent,
+    ApiUrlPipe,
+    LoginComponent,
+    SignupComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,

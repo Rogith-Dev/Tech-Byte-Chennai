@@ -7,6 +7,8 @@ import { PCHardwareAddComponent } from './admin-page/pc-hardware-add/pc-hardware
 import { PCHardwareViewComponent } from './admin-page/pc-hardware-view/pc-hardware-view.component';
 import { PCHardwareEditComponent } from './admin-page/pc-hardware-edit/pc-hardware-edit.component';
 import { PCHardwareListComponent } from './admin-page/pc-hardware-list/pc-hardware-list.component';
+import { LoginComponent } from './auth/login/login.component';
+import { SignupComponent } from './auth/signup/signup.component';
 
 const routes: Routes = [
   { path: 'prebuild-pc-list', component: PreBuildPCListComponent },
@@ -16,6 +18,8 @@ const routes: Routes = [
   { path: 'pc-hardware-view/:id', component: PCHardwareViewComponent },
   { path: 'pc-hardware-edit/:id', component: PCHardwareEditComponent },
   { path: 'pc-hardware-list', component: PCHardwareListComponent },
+  { path: 'login', component: LoginComponent, data: { hideHeader: true } },
+  { path: 'signup', component: SignupComponent, data: { hideHeader: true } },
 
 ];
 

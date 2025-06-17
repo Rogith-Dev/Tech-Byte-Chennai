@@ -22,7 +22,7 @@
                     <div class="mb-3">
                         <label class="fw-bold">Product Image:</label>
                         <div *ngIf="pcComponentObj.filePath">
-                            <img [src]="pcComponentObj.filePath" alt="Product Image" class="img-thumbnail"
+                            <img [src]="pcComponentObj.filePath | apiUrl" alt="Product Image" class="img-thumbnail"
                                 style="max-width: 200px;">
                         </div>
                         <div *ngIf="!pcComponentObj.filePath" class="text-muted">No image uploaded</div>
