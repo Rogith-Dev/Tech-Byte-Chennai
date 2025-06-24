@@ -63,4 +63,19 @@ export class AlertService {
             title: args
         });
     }
+
+    showSucessOkMessage(args: any,) {
+        Swal.fire({
+            title: args,
+            icon: "success"
+        });
+    }
+
+    showErrorOkMessage(args: any,) {
+        Swal.fire({
+            title: args,
+            icon: "error"
+        });
+    }
+
 }

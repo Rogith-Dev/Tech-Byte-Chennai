@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const createDefaultAdmin = require('./utils/createDefaultAdmin');
+const createDefaultAdmin = require('./api/utils/createDefaultAdmin');
 require('dotenv').config({ path: './config.env' });
 
 

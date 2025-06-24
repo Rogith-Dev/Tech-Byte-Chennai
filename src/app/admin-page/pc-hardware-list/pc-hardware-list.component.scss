@@ -19,17 +19,20 @@
 }
 
 .mat-column-type {
-    max-width: 150px;
+    max-width: 130px;
+}
+.mat-column-brandType {
+    max-width: 110px;
 }
 
 .mat-column-originalPrice,
 .mat-column-sellingPrice {
-    max-width: 190px;
-    text-align: right;
+    max-width: 140px;
+    text-align: center;
 }
 
 .mat-column-status {
-    max-width: 100px;
+    max-width: 60px;
 }
 
 .mat-column-actions {

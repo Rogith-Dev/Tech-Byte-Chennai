@@ -24,16 +24,16 @@ export class PCBuildComponent {
 
   public isScrolled = false;
   public serverConstant = ServerConstant;
-  public componentTypes: any;
   public sortOption: string = 'priceLowHigh';
   public searchTerm: string = '';
-  public filteredItems: any;
   public loading = false;
 
   // Pagination
   public page = 1;
   public pageSize = 20;
   public totalItems = 0;
+  products: any[] = [];
+  selectedBrand = '';
 
 
   public selectedComponent: any;
@@ -50,7 +50,6 @@ export class PCBuildComponent {
   }
 
   ngOnInit() {
-    this.filteredItems = this.componentTypes;
 
   }
 
@@ -68,70 +67,49 @@ export class PCBuildComponent {
   }
 
   applyFilters() {
-    let items = [...this.filteredItems];
-
-    // Filter
-    if (this.searchTerm) {
-      const term = this.searchTerm.toLowerCase();
-      items = items.filter(item => item.name.toLowerCase().includes(term));
-    }
-
-    // Sort
-    switch (this.sortOption) {
-      case 'priceLowHigh':
-        items.sort((a, b) => a.sellingPrice - b.sellingPrice);
-        break;
-      case 'priceHighLow':
-        items.sort((a, b) => b.sellingPrice - a.sellingPrice);
-        break;
-    }
-
-    // Pagination
-    this.totalItems = items.length;
-    const start = (this.page - 1) * this.pageSize;
-    const end = start + this.pageSize;
-    this.componentTypes = items.slice(start, end);
-  }
-
-  public sortProducts() {
-    this.page = 1; // reset to first page
-    this.applyFilters();
-    if (this.scrollContainer && this.scrollContainer.nativeElement) {
-      this.scrollContainer.nativeElement.scrollTop = 0;
-    }
-  }
-  public onPageChange(event: PageEvent) {
-    this.pageSize = event.pageSize;
-    this.page = event.pageIndex + 1;
-    this.applyFilters();
-
-    if (this.scrollContainer && this.scrollContainer.nativeElement) {
-      this.scrollContainer.nativeElement.scrollTop = 0;
-    }
-  }
-
-  public onChangeBrand(brand: any) {
-
-    // this.componentTypes = this.filteredItems.filter((item: any) => item.brand === brand);
-
-    this.loading = true;
-    this.http.post(environment.apiUrl + '/api/product/getProductsByFilter', { filter: brand }).subscribe({
+    const params = {
+      searchTerm: this.searchTerm,
+      brand: this.selectedBrand,
+      sortOption: this.sortOption,
+      page: this.page,
+      pageSize: this.pageSize,
+      productType: this.selectedComponent
+    };
+    this.http.post(environment.apiUrl + '/api/product/getProductsByFilter', params).subscribe({
       next: (res: any) => {
-        this.componentTypes = res;
-        this.loading = false;
-      },
-      error: (err: any) => {
+        this.products = res.products;
+        this.totalItems = res.totalItems;
+      }, error: (err: any) => {
+        console.log(err, 'err');
 
       }
-    })
+    });
   }
+
+  onChangeBrand(brand: string) {
+    this.selectedBrand = brand;
+    this.page = 1;
+    this.applyFilters();
+  }
+
+  sortProducts(event: any) {
+    this.sortOption = event.target.value;
+    this.page = 1;
+    this.applyFilters();
+  }
+
+  onPageChange(event: any) {
+    this.page = event.pageIndex + 1;
+    this.applyFilters();
+  }
+
   public openComponentsModel(data: any) {
     this.loading = true;
+    this.selectedComponent = data.type;
 
-    this.http.post(environment.apiUrl + '/api/product/getProductListByName', { productType: data.name }).subscribe({
+    this.http.post(environment.apiUrl + '/api/product/getProductListByName', { productType: data.type }).subscribe({
       next: (res: any) => {
-        this.componentTypes = res;
-        this.filteredItems = res;
+        this.products = res;
         this.totalItems = data.length;
         this.applyFilters();
         this.loading = false;
@@ -150,6 +128,7 @@ export class PCBuildComponent {
 
   public closeModal() {
     this.searchTerm = '';
+    this.selectedComponent = null;
     if (this.modalInstance) {
       this.modalInstance.hide();
     }

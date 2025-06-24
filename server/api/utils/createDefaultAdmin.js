@@ -1,5 +1,5 @@
 const bcrypt = require('bcrypt');
-const User = require('../api/user/user.model');
+const User = require('../models/user.model');
 
 async function createDefaultAdmin() {
     const existingAdmin = await User.findOne({ email: 'admin@techbyte.com' });

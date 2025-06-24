@@ -43,7 +43,7 @@ export class LoginComponent {
                 localStorage.setItem('user', JSON.stringify(res.user));
                 this.router.navigate(['/pc-build']);
             },
-            error: (err) => {
+            error: (err: any) => {
                 let message = err.error.message || 'Login failed';
                 this.alertService.showErrorToasterMessage(message);
             }

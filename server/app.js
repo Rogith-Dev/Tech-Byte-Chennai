@@ -16,6 +16,6 @@ app.use(cors({
   credentials: true
 }));
 
-require('./routes')(app);
+require('./api/routes')(app);
 
 module.exports = app;

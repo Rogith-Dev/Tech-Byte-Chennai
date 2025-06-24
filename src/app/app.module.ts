@@ -34,6 +34,8 @@ import { SignupComponent } from './auth/signup/signup.component';
 import { HeaderComponent } from './components/header/header.component';
 import { AdminDashboardComponent } from './root-admin/admin-dashboard/admin-dashboard.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './auth/reset-password/reset-password.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +53,9 @@ import { NgxPaginationModule } from 'ngx-pagination';
     LoginComponent,
     SignupComponent,
     HeaderComponent,
-    AdminDashboardComponent
+    AdminDashboardComponent,
+    ForgotPasswordComponent,
+    ResetPasswordComponent
   ],
   imports: [
     BrowserModule,

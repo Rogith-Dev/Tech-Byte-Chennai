@@ -1,4 +1,4 @@
-const Product = require('./product.model');
+const Product = require('../models/product.model');
 // const BASE_URL = process.env.BASE_URL || 'http://localhost:3000';
 
 exports.getAllProducts = async (req, res) => {
@@ -37,10 +37,10 @@ exports.getProductById = async (req, res) => {
 
 exports.createProduct = async (req, res) => {
     try {
-        const { name, originalPrice, sellingPrice, productType, isActive } = req.body;
+        const { name, originalPrice, sellingPrice, productType, brandType, isActive } = req.body;
         const filePath = req.file ? `/uploads/${req.file.filename}` : '';
 
-        const product = new Product({ name, originalPrice, sellingPrice, productType, isActive, filePath });
+        const product = new Product({ name, originalPrice, sellingPrice, productType, brandType, isActive, filePath });
         await product.save();
         res.status(201).json({ success: true, data: product });
     } catch (err) {
@@ -60,7 +60,7 @@ exports.getProductDetail = async (req, res) => {
 
 exports.updateProduct = async (req, res) => {
     try {
-        const { productId, name, sellingPrice, originalPrice, productType, isActive } = req.body;
+        const { productId, name, sellingPrice, originalPrice, productType, brandType, isActive } = req.body;
 
         // Optionally use req.file if a new file was uploaded
         const updateData = {
@@ -68,6 +68,7 @@ exports.updateProduct = async (req, res) => {
             sellingPrice,
             originalPrice,
             productType,
+            brandType,
             isActive,
         };
 
@@ -105,11 +106,33 @@ exports.getProductListByName = async (req, res) => {
 
 exports.getProductsByFilter = async (req, res) => {
     try {
-        let input = req.body;
-        const result = await Product.find({
-            name: { $regex: input.filter, $options: 'i' }
-        });
-        res.status(200).json(result);
+        const { searchTerm, brand, sortOption, page, pageSize, productType } = req.body;
+
+        const filter = {};
+        if (searchTerm) {
+            filter.name = { $regex: searchTerm, $options: 'i' };
+        }
+        if (brand) {
+            filter.brandType = brand;
+        }
+        if (productType) {
+            filter.productType = productType;
+        }
+
+        const sort = {};
+        if (sortOption === 'priceLowHigh') {
+            sort.sellingPrice = 1;
+        } else if (sortOption === 'priceHighLow') {
+            sort.sellingPrice = -1;
+        }
+
+        const totalItems = await Product.countDocuments(filter);
+        const products = await Product.find(filter)
+            .sort(sort)
+            .skip((page - 1) * pageSize)
+            .limit(pageSize);
+
+        res.json({ products, totalItems });
     } catch (err) {
         console.error(err);
         res.status(500).json({ error: 'Internal server error' });

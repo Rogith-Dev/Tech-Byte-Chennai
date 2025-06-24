@@ -34,6 +34,21 @@
                     </div>
                   </div>
 
+                  <!-- Brand Type -->
+                  <div class="col-sm-12 col-md-12 mt-2 mb-3">
+                    <div class="form-floating">
+                      <mat-form-field appearance="fill" class="w-100">
+                        <mat-label>Brand Type<span class="importanSymbol">*</span></mat-label>
+                        <mat-select formControlName="brandType">
+                          <mat-option *ngFor="let data of BrandTypes" [value]="data">
+                            {{ data }}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+
+                    </div>
+                  </div>
+
                   <!-- Product Image -->
                   <div class="col-md-12 mt-2 mb-3">
                     <label for="productImage">Product Image</label>

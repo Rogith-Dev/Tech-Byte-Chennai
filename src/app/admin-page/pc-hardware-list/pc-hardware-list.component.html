@@ -37,6 +37,12 @@
             <mat-cell *matCellDef="let component">{{ component.productType }}</mat-cell>
           </ng-container>
 
+          <!-- Brand Type -->
+          <ng-container matColumnDef="brandType">
+            <mat-header-cell *matHeaderCellDef>Brand Type</mat-header-cell>
+            <mat-cell *matCellDef="let component">{{ component.brandType }}</mat-cell>
+          </ng-container>
+
           <!-- Original Price Column -->
           <ng-container matColumnDef="originalPrice">
             <mat-header-cell *matHeaderCellDef>Original Price</mat-header-cell>

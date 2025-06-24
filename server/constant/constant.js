@@ -203,3 +203,7 @@ module.exports.ComponentsIcon = [
     },
 ]
 
+module.exports.BrandTypes = {
+    amd: 'AMD',
+    intel: 'Intel'
+}

@@ -8,6 +8,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { HttpService } from 'src/app/services/http-service/http.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AlertService } from 'src/app/services/alert-service/alert.service';
 
 @Component({
   selector: 'app-pc-hardware-edit',
@@ -20,6 +21,7 @@ export class PCHardwareEditComponent {
   public selectedFile: File | null = null;
   public productId: any
   public serverConstant = ServerConstant;
+  public BrandTypes = _.values(ServerConstant.BrandTypes);
   fileName: any;
 
 
@@ -27,7 +29,8 @@ export class PCHardwareEditComponent {
     private fb: FormBuilder,
     private http: HttpClient,
     private activatedRoute: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private alertService: AlertService
   ) {
   }
 
@@ -39,6 +42,7 @@ export class PCHardwareEditComponent {
     this.pcComponentEditForm = this.fb.group({
       name: ['', Validators.required],
       productType: ['', Validators.required],
+      brandType: [''],
       originalPrice: [null, Validators.required],
       sellingPrice: [null, Validators.required],
       isActive: [false],
@@ -56,6 +60,7 @@ export class PCHardwareEditComponent {
         this.pcComponentEditForm.patchValue({
           name: res.name,
           productType: res.productType,
+          brandType: res.brandType,
           sellingPrice: res.sellingPrice,
           originalPrice: res.originalPrice,
           isActive: res.isActive
@@ -85,6 +90,7 @@ export class PCHardwareEditComponent {
     formData.append('sellingPrice', this.pcComponentEditForm.get('sellingPrice')?.value);
     formData.append('originalPrice', this.pcComponentEditForm.get('originalPrice')?.value);
     formData.append('productType', this.pcComponentEditForm.get('productType')?.value);
+    formData.append('brandType', this.pcComponentEditForm.get('brandType')?.value);
     formData.append('isActive', this.pcComponentEditForm.get('isActive')?.value);
     formData.append('productId', this.productId);
     if (this.selectedFile) {
@@ -93,7 +99,7 @@ export class PCHardwareEditComponent {
 
     this.http.post(environment.apiUrl + '/api/product/update', formData).subscribe({
       next: () => {
-        alert('Updated successfully');
+        this.alertService.showSuccessToasterMessage('Updated successfully');
         this.router.navigate(['/pc-hardware-list']);
       },
       error: err => {

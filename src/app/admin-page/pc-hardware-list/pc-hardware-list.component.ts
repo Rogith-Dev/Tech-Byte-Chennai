@@ -21,7 +21,7 @@ export class PCHardwareListComponent {
   public selectedFile: File | null = null;
   public serverConstant = ServerConstant;
   public pcComponents: any;
-  public displayedColumns: string[] = ['index', 'image', 'name', 'type', 'originalPrice', 'sellingPrice', 'status', 'actions'];
+  public displayedColumns: string[] = ['index', 'image', 'name', 'type', 'brandType', 'originalPrice', 'sellingPrice', 'status', 'actions'];
   dataSource = new MatTableDataSource<any>();
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
