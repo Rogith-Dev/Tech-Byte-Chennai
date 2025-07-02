@@ -37,7 +37,9 @@ export class PCBuildComponent {
 
 
   public selectedComponent: any;
-  public brands = _.values(ServerConstant.ProcessorCatagory.Brand);
+  // public brands = _.values(ServerConstant.ProcessorCatagory.Brand);
+  public brands = ServerConstant.BrandTypes;
+  // public brands: any;
   public cpuSupports = ['AMD AM4', 'AMD AM5', 'Intel LGA 1200', 'Intel LGA 1700', 'SWRX8'];
   public selectedComponents: { [key: string]: any } = {};
   modalInstance: any;
@@ -66,6 +68,24 @@ export class PCBuildComponent {
       });
   }
 
+  private getProductsCounts() {
+    const params = { productType: this.selectedComponent };
+    this.http.post(environment.apiUrl + '/api/product/getProductsCounts', params).subscribe({
+      next: (res: any) => {
+        const counts = res.brandCounts;
+
+        counts.forEach((brandCount: any) => {
+          let brand = this.brands.find((b: any) => b.brand === brandCount._id);
+          if (brand) {
+            brand.count = brandCount.count;
+          }
+        });
+      }, error: (err: any) => {
+        console.log(err, 'err');
+
+      }
+    });
+  }
   applyFilters() {
     const params = {
       searchTerm: this.searchTerm,
@@ -86,8 +106,8 @@ export class PCBuildComponent {
     });
   }
 
-  onChangeBrand(brand: string) {
-    this.selectedBrand = brand;
+  onChangeBrand(obj: any) {
+    this.selectedBrand = obj.brand;
     this.page = 1;
     this.applyFilters();
   }
@@ -106,6 +126,7 @@ export class PCBuildComponent {
   public openComponentsModel(data: any) {
     this.loading = true;
     this.selectedComponent = data.type;
+    this.getProductsCounts();
 
     this.http.post(environment.apiUrl + '/api/product/getProductListByName', { productType: data.type }).subscribe({
       next: (res: any) => {

@@ -138,3 +138,28 @@ exports.getProductsByFilter = async (req, res) => {
         res.status(500).json({ error: 'Internal server error' });
     }
 }
+exports.getProductsCounts = async (req, res) => {
+    try {
+        const { productType } = req.body;
+
+        let intelCounts = 0;
+        let amdCounts = 0;
+        let counts;
+        if (productType === 'Processor') {
+            counts = await Product.aggregate([
+                { $match: { brandType: { $in: ['Intel', 'AMD'] } } },
+                {
+                    $group: {
+                        _id: '$brandType',
+                        count: { $sum: 1 }
+                    }
+                }
+            ]);
+        }
+
+        res.json({ brandCounts: counts });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+}
