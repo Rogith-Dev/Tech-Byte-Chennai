@@ -3,10 +3,11 @@
 const express = require('express');
 const multer = require('multer');
 const router = express.Router();
+const path = require('path');
 const controller = require('../controllers/product.controller');
 
 const storage = multer.diskStorage({
-    destination: '../../uploads',
+    destination: (req, file, cb) => { cb(null, path.join(__dirname, '../../uploads')); },
     filename: (req, file, cb) => cb(null, Date.now() + '-' + file.originalname)
 });
 const upload = multer({ storage });

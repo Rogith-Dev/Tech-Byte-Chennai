@@ -138,6 +138,7 @@ exports.getProductsByFilter = async (req, res) => {
         res.status(500).json({ error: 'Internal server error' });
     }
 }
+
 exports.getProductsCounts = async (req, res) => {
     try {
         const { productType } = req.body;

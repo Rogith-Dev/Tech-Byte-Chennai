@@ -1,5 +1,4 @@
 import { Component, HostListener } from '@angular/core';
-import { ProductService } from 'src/app/services/product.service';
 
 @Component({
   selector: 'app-prebuilt-pc-list',
@@ -59,8 +58,7 @@ export class PreBuildPCListComponent {
     { name: 'Student Builds', value: 'Student Builds' }
   ];
 
-  constructor(private productService: ProductService) {
-    // this.products = this.productService.getProducts();
+  constructor() {
   }
 
   @HostListener('window:scroll', [])

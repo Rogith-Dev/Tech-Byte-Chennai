@@ -6,7 +6,6 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ProductCardComponent } from './components/product-card/product-card.component';
 import { PreBuildPCListComponent } from './pages/pre-build-pc/prebuilt-pc-list/prebuilt-pc-list.component';
 import { PreBuildPCDetailComponent } from './pages/pre-build-pc/prebuilt-pc-detail/prebuilt-pc-detail.component';
 import { MatCardModule } from '@angular/material/card';
@@ -42,7 +41,6 @@ import { ResetPasswordComponent } from './auth/reset-password/reset-password.com
     AppComponent,
     PreBuildPCListComponent,
     PreBuildPCDetailComponent,
-    ProductCardComponent,
     PCBuildComponent,
     PCHardwareAddComponent,
     PCHardwareViewComponent,

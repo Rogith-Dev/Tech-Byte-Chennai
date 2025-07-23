@@ -1,5 +1,4 @@
 import { Component, HostListener } from '@angular/core';
-import { ProductService } from 'src/app/services/product.service';
 
 @Component({
   selector: 'app-prebuilt-pc-detail',

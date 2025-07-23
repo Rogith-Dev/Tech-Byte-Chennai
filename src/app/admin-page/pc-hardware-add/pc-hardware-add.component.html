@@ -40,8 +40,8 @@
                       <mat-form-field appearance="fill" class="w-100">
                         <mat-label>Brand Type<span class="importanSymbol">*</span></mat-label>
                         <mat-select formControlName="brandType">
-                          <mat-option *ngFor="let data of BrandTypes" [value]="data">
-                            {{ data }}
+                          <mat-option *ngFor="let data of BrandTypes" [value]="data.brand">
+                            {{ data.brand }}
                           </mat-option>
                         </mat-select>
                       </mat-form-field>
